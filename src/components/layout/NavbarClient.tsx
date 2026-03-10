@@ -132,7 +132,7 @@ export default function NavbarClient({ posts }: Props) {
                 text-[11px]
                 rounded
                 bg-[rgb(var(--color-primary))]
-                text-white
+                text-[rgb(var(--color-white))]
               "
               >
                 Konsultasi

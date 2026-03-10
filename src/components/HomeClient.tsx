@@ -1,0 +1,79 @@
+"use client";
+
+import Hero from "@/components/Hero";
+import HybridWhatsAppCTA from "@/components/HybridWhatsAppCTA";
+import TrustStrip from "@/components/TrustStripSection";
+import FinalCTASection from "@/components/FinalCTASection";
+import SectionWrapper from "@/components/SectionWrapper";
+import VisualServicesPreview from "@/components/VisualServicesPreview";
+import PortfolioPreview from "@/components/PortfolioPreview";
+
+/* ================================
+   STRUCTURED DATA
+================================ */
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Bangun.in",
+  url: "https://bangun.in",
+  description:
+    "Konsultan arsitektur, engineering dan geoteknik profesional di Indonesia.",
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "EngineeringService",
+  name: "Bangun.in Engineering Consultant",
+  provider: {
+    "@type": "Organization",
+    name: "PT Bangun Cipta Solusi",
+  },
+  areaServed: "Indonesia",
+  serviceType: [
+    "Architecture Design",
+    "Engineering Consultant",
+    "Geotechnical Engineering",
+    "Topography Survey",
+  ],
+};
+
+export default function HomeClient() {
+  return (
+    <>
+      {/* WebSite Schema */}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+
+      {/* Service Schema */}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema),
+        }}
+      />
+
+      <main className="relative">
+        <Hero />
+
+        <TrustStrip />
+
+        <VisualServicesPreview />
+
+        <PortfolioPreview />
+
+        <SectionWrapper withDivider={false}>
+          <FinalCTASection />
+        </SectionWrapper>
+
+        <HybridWhatsAppCTA />
+      </main>
+    </>
+  );
+}

@@ -6,7 +6,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function HeroAboutSection() {
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg"; // ganti dengan foto tim meeting / blueprint
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png"; // ganti dengan foto tim meeting / blueprint
 
   return (
     <section className="relative min-h-[360px] md:min-h-[460px] flex items-center overflow-hidden bg-[rgb(var(--color-bg))]">

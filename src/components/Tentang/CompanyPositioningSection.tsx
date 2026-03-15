@@ -6,7 +6,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function CompanyPositioningSection() {
   const positioningImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-BEASISWA-LANDSCAPE_uk71mp.png"; // ganti sesuai foto tim diskusi / site visit
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565282/sinergy_l0dwjh.jpg"; // ganti sesuai foto tim diskusi / site visit
 
   return (
     <section id="sinergi" className="relative py-10 md:py-20 bg-[rgb(var(--color-bg))] overflow-hidden">

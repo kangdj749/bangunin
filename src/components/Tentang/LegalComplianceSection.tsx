@@ -11,7 +11,7 @@ export default function LegalComplianceSection() {
   ];
 
   const documentImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-BEASISWA-LANDSCAPE_uk71mp.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565509/legal_jz8hzg.jpg";
 
   return (
     <section id="legalitas" className="relative py-12 md:py-20 bg-[rgb(var(--color-bg))]">

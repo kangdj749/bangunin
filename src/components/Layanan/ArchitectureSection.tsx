@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { cloudinaryImage } from "@/lib/cloudinaryImage";
@@ -19,6 +19,7 @@ function ArchitectureCard({
   onOpenLightbox: (images: string[], index: number) => void;
 }) {
   const [slide, setSlide] = useState(0);
+  const startX = useRef<number | null>(null);
 
   const total = project.images.length;
 
@@ -31,10 +32,26 @@ function ArchitectureCard({
 
     const interval = setInterval(() => {
       setSlide((s) => (s + 1) % total);
-    }, 4000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [total]);
+
+  /* swipe mobile */
+  const handleTouchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (startX.current === null) return;
+
+    const diff = e.changedTouches[0].clientX - startX.current;
+
+    if (diff > 50) prev();
+    if (diff < -50) next();
+
+    startX.current = null;
+  };
 
   return (
     <div
@@ -50,17 +67,35 @@ function ArchitectureCard({
       hover:shadow-[var(--shadow-elevated)]
     "
     >
-      {/* Carousel */}
-      <div className="relative h-[200px] overflow-hidden">
+      {/* Slider */}
+      <div
+        className="relative h-[200px] overflow-hidden"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
 
-        <Image
-          src={cloudinaryImage(project.images[slide], "preview")}
-          alt={project.title}
-          fill
-          sizes="(max-width:768px) 50vw, 33vw"
-          onClick={() => onOpenLightbox(project.images, slide)}
-          className="object-cover cursor-pointer transition-transform duration-500 hover:scale-105"
-        />
+        <div
+          className="flex h-full transition-transform duration-500"
+          style={{
+            transform: `translateX(-${slide * 100}%)`,
+          }}
+        >
+          {project.images.map((img, i) => (
+            <div
+              key={i}
+              className="relative min-w-full h-[200px]"
+              onClick={() => onOpenLightbox(project.images, i)}
+            >
+              <Image
+                src={cloudinaryImage(img, "preview")}
+                alt={project.title}
+                fill
+                sizes="(max-width:768px) 50vw, 33vw"
+                className="object-cover cursor-pointer"
+              />
+            </div>
+          ))}
+        </div>
 
         {/* Arrows */}
         {total > 1 && (
@@ -110,6 +145,7 @@ function ArchitectureCard({
           ))}
 
         </div>
+
       </div>
 
       {/* Text */}
@@ -360,26 +396,6 @@ export default function ArchitectureSection() {
     index: number;
   } | null>(null);
 
-  const next = () =>
-    setLightbox((l) =>
-      l
-        ? {
-            ...l,
-            index: (l.index + 1) % l.images.length,
-          }
-        : l
-    );
-
-  const prev = () =>
-    setLightbox((l) =>
-      l
-        ? {
-            ...l,
-            index: l.index === 0 ? l.images.length - 1 : l.index - 1,
-          }
-        : l
-    );
-
   return (
     <section id="arsitektur" className="section-tight bg-[rgb(var(--color-bg))]">
 
@@ -431,7 +447,7 @@ export default function ArchitectureSection() {
           />
 
           <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/20" />
-        </motion.div>
+        </motion.div>  
 
         {/* GRID */}
         <div className="grid grid-cols-2 gap-4">
@@ -456,7 +472,7 @@ export default function ArchitectureSection() {
         </div>
       </div>
 
-      {/* LIGHTBOX */}
+      {/* Lightbox */}
       {lightbox && (
         <div
           className="
@@ -464,29 +480,8 @@ export default function ArchitectureSection() {
           bg-black/90
           flex items-center justify-center
         "
+          onClick={() => setLightbox(null)}
         >
-
-          <button
-            onClick={() => setLightbox(null)}
-            className="absolute top-6 right-6 text-white text-[20px]"
-          >
-            ✕
-          </button>
-
-          <button
-            onClick={prev}
-            className="absolute left-6 text-white text-[28px]"
-          >
-            ‹
-          </button>
-
-          <button
-            onClick={next}
-            className="absolute right-6 text-white text-[28px]"
-          >
-            ›
-          </button>
-
           <div className="relative w-[90vw] h-[80vh]">
 
             <Image
@@ -500,7 +495,6 @@ export default function ArchitectureSection() {
             />
 
           </div>
-
         </div>
       )}
     </section>

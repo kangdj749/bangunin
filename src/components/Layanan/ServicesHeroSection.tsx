@@ -6,7 +6,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function ServicesHeroSection() {
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773549685/Flag_map_of_Indonesia_w6ofjn.svg";
 
   return (
     <section className="relative overflow-hidden bg-[rgb(var(--color-bg))]">

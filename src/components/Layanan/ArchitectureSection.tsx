@@ -11,6 +11,8 @@ type Project = {
   images: string[];
 };
 
+/* ================= CARD ================= */
+
 function ArchitectureCard({
   project,
   onOpenLightbox,
@@ -37,7 +39,7 @@ function ArchitectureCard({
     return () => clearInterval(interval);
   }, [total]);
 
-  /* swipe mobile */
+  /* swipe */
   const handleTouchStart = (e: React.TouchEvent) => {
     startX.current = e.touches[0].clientX;
   };
@@ -57,33 +59,30 @@ function ArchitectureCard({
     <div
       className="
       bg-[rgb(var(--color-surface))]
-      border
-      border-[rgb(var(--color-border))]
+      border border-[rgb(var(--color-border))]
       rounded-[var(--radius-md)]
       overflow-hidden
       shadow-[var(--shadow-soft)]
-      transition-all
-      duration-300
       hover:shadow-[var(--shadow-elevated)]
+      transition-all
     "
     >
-      {/* Slider */}
+      {/* slider */}
       <div
         className="relative h-[200px] overflow-hidden"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-
         <div
           className="flex h-full transition-transform duration-500"
           style={{
-            transform: `translateX(-${slide * 100}%)`,
+            transform: `translate3d(-${slide * 100}%,0,0)`,
           }}
         >
           {project.images.map((img, i) => (
             <div
               key={i}
-              className="relative min-w-full h-[200px]"
+              className="relative w-full flex-shrink-0"
               onClick={() => onOpenLightbox(project.images, i)}
             >
               <Image
@@ -97,16 +96,18 @@ function ArchitectureCard({
           ))}
         </div>
 
-        {/* Arrows */}
+        {/* arrows */}
         {total > 1 && (
           <>
             <button
-              onClick={prev}
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
               className="
               absolute left-2 top-1/2 -translate-y-1/2
-              w-7 h-7
+              w-7 h-7 rounded-full
               bg-white/80
-              rounded-full
               text-[13px]
               flex items-center justify-center
             "
@@ -115,12 +116,14 @@ function ArchitectureCard({
             </button>
 
             <button
-              onClick={next}
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
               className="
               absolute right-2 top-1/2 -translate-y-1/2
-              w-7 h-7
+              w-7 h-7 rounded-full
               bg-white/80
-              rounded-full
               text-[13px]
               flex items-center justify-center
             "
@@ -130,27 +133,25 @@ function ArchitectureCard({
           </>
         )}
 
-        {/* Dots */}
-        <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
-
-          {project.images.map((_, i) => (
-            <div
-              key={i}
-              className={`h-[4px] rounded-full transition-all ${
-                slide === i
-                  ? "w-[16px] bg-[rgb(var(--color-primary))]"
-                  : "w-[6px] bg-white/70"
-              }`}
-            />
-          ))}
-
-        </div>
-
+        {/* indicator */}
+        {total > 1 && (
+          <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
+            {project.images.map((_, i) => (
+              <div
+                key={i}
+                className={`h-[4px] rounded-full transition-all ${
+                  slide === i
+                    ? "w-[16px] bg-[rgb(var(--color-primary))]"
+                    : "w-[6px] bg-white/70"
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
-      {/* Text */}
+      {/* text */}
       <div className="p-3">
-
         <h3 className="text-[12.5px] font-semibold text-[rgb(var(--color-text))] mb-1">
           {project.title}
         </h3>
@@ -158,14 +159,14 @@ function ArchitectureCard({
         <p className="text-[11px] leading-[1.5] text-[rgb(var(--color-muted))]">
           {project.desc}
         </p>
-
       </div>
     </div>
   );
 }
 
-export default function ArchitectureSection() {
+/* ================= SECTION ================= */
 
+export default function ArchitectureSection() {
   const heroImage =
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773533546/kantor2_m1hqrp.png";
 
@@ -390,8 +391,7 @@ export default function ArchitectureSection() {
       ],
     },
   ];
-
-   /* ===== LIGHTBOX ===== */
+  /* ===== lightbox ===== */
 
   const [lightbox, setLightbox] = useState<{
     images: string[];
@@ -439,10 +439,45 @@ export default function ArchitectureSection() {
   return (
     <section id="arsitektur" className="section-tight bg-[rgb(var(--color-bg))]">
       <div className="container-main">
-        <h2 className="h2 text-[rgb(var(--color-primary))] mb-6">
-          Layanan Arsitektur
-        </h2>
 
+        {/* heading */}
+        <div className="mb-6">
+          <h2 className="h2 text-[rgb(var(--color-primary))] mb-2">
+            Layanan Arsitektur
+          </h2>
+
+          <p className="text-[12px] text-[rgb(var(--color-muted))] max-w-[520px]">
+            Perencanaan arsitektur profesional untuk berbagai jenis bangunan
+            dengan pendekatan fungsi, estetika, dan keberlanjutan.
+          </p>
+        </div>
+
+        {/* hero */}
+        <div
+          className="
+          relative
+          w-full
+          h-[220px]
+          md:h-[320px]
+          rounded-[var(--radius-lg)]
+          overflow-hidden
+          border border-[rgb(var(--color-border))]
+          shadow-[var(--shadow-soft)]
+          mb-8
+          "
+        >
+          <Image
+            src={cloudinaryImage(heroImage, "banner")}
+            alt="Proyek arsitektur"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+
+        {/* grid */}
         <div className="grid grid-cols-2 gap-4">
           {projects.map((project, i) => (
             <ArchitectureCard
@@ -459,12 +494,7 @@ export default function ArchitectureSection() {
       {/* LIGHTBOX */}
       {lightbox && (
         <div
-          className="
-          fixed inset-0
-          bg-black/95
-          z-50
-          flex items-center justify-center
-          "
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
           onClick={() => setLightbox(null)}
         >
           <div
@@ -482,6 +512,28 @@ export default function ArchitectureSection() {
               fill
               className="object-contain"
             />
+
+            {/* close button */}
+            <button
+              onClick={() => setLightbox(null)}
+              className="
+              absolute
+              top-4
+              right-4
+              w-9
+              h-9
+              rounded-full
+              bg-black/60
+              text-white
+              text-[18px]
+              flex
+              items-center
+              justify-center
+              backdrop-blur
+            "
+            >
+              ✕
+            </button>
 
             {/* arrows */}
             {lightbox.images.length > 1 && (

@@ -313,7 +313,7 @@ export default function ArchitectureSection() {
       images: [masjid1, masjid2, masjid3, masjid4, masjid5, masjid6, masjid7, masjid8],
     },
     {
-      title: "Bangunan Pendidikan",
+      title: "Bangun Pendidikan",
       desc: "Desain fasilitas pendidikan yang fungsional dan adaptif.",
       images: [sekolah3,sekolah1, sekolah2, sekolah4, sekolah5],
     },
@@ -328,7 +328,7 @@ export default function ArchitectureSection() {
       images: [kost1, kost2, kost3],
     },
     {
-      title: "Bangunan Perkantoran",
+      title: "Bangun Perkantoran",
       desc: "Ruang kerja profesional yang efisien dan representatif.",
       images: [kantor1, kantor2],
     },

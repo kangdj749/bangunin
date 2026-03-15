@@ -10,32 +10,32 @@ export default function VisualServicesPreview() {
     {
       title: "Penataan Ruang",
       description: "Perencanaan tata ruang berbasis regulasi & data spasial.",
-      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-250-ANAK-YATIM-LANDSCAPE_tocttp.png",
+      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773544179/tataruang1_wkdygs.png",
     },
     {
       title: "Perencanaan Arsitektur",
       description: "Desain kontekstual, fungsional, dan berkelanjutan.",
-      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-250-ANAK-YATIM-LANDSCAPE_tocttp.png",
+      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773533548/kantor2_ea9zdw.png",
     },
     {
       title: "Rekayasa Teknik",
       description: "Solusi struktur, infrastruktur & MEP terintegrasi.",
-      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-250-ANAK-YATIM-LANDSCAPE_tocttp.png",
+      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773561465/rekayasa_d37iob.png",
     },
     {
       title: "Konsultasi Lingkungan",
       description: "Kajian AMDAL & dokumen lingkungan komprehensif.",
-      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-250-ANAK-YATIM-LANDSCAPE_tocttp.png",
+      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773544180/tataruang2_dptigc.png",
     },
     {
       title: "Jasa Bantu Teknik",
       description: "Dukungan teknis untuk pelaksanaan proyek.",
-      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-250-ANAK-YATIM-LANDSCAPE_tocttp.png",
+      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540464/rumahtinggal7_zjkh7z.png",
     },
     {
       title: "Survei & Telematika",
       description: "Pengukuran presisi & integrasi data geospasial.",
-      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772352740/SECTION-250-ANAK-YATIM-LANDSCAPE_tocttp.png",
+      image: "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773561867/topografi_lkvr8d.png",
     },
   ];
 

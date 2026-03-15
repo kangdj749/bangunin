@@ -14,7 +14,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 export default function EngineeringSection() {
 
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773561465/rekayasa_d37iob.png";
 
   const services = [
     {

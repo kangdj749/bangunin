@@ -16,7 +16,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Bangun.in",
-  url: "https://bangun.in",
+  url: "https://bangunin.com",
   description:
     "Konsultan arsitektur, engineering dan geoteknik profesional di Indonesia.",
 };

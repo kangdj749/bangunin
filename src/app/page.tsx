@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   ],
 
   alternates: {
-    canonical: "https://bangun.in",
+    canonical: "https://bangunin.com",
   },
 
   openGraph: {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
       "Bangun.in | Konsultan Arsitektur, Engineering & Geoteknik Profesional",
     description:
       "Solusi perencanaan arsitektur, engineering dan konstruksi profesional untuk proyek skala kecil hingga besar.",
-    url: "https://bangun.in",
+    url: "https://bangunin.com",
     siteName: "Bangun.in",
     locale: "id_ID",
     type: "website",

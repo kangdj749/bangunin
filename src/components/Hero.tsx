@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png";
 
   return (
     <section className="relative min-h-[460px] md:min-h-[600px] flex items-center overflow-hidden bg-[rgb(var(--color-bg))]">

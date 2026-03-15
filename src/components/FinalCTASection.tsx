@@ -6,7 +6,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function ClosingCTA() {
   const backgroundImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png";
 
   return (
     <section className="relative overflow-hidden border-t border-[rgb(var(--color-secondary))]/15">

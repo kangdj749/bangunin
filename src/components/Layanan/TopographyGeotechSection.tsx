@@ -9,12 +9,12 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 export default function TopographyGeotechSection() {
 
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773561867/topografi_lkvr8d.png";
 
   const gallery = [
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg",
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg",
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1772197330/Masjid-al-jabbar2_ptlpcm.jpg",
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773562430/topografi2_a65shu.png",
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773562399/topografi3_qcmk5e.png",
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773562169/topografi4_vhzcyc.png",
   ];
 
   const services = [

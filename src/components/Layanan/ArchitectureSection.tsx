@@ -391,99 +391,88 @@ export default function ArchitectureSection() {
     },
   ];
 
+   /* ===== LIGHTBOX ===== */
+
   const [lightbox, setLightbox] = useState<{
     images: string[];
     index: number;
   } | null>(null);
 
+  const startX = useRef<number | null>(null);
+
+  const next = () => {
+    if (!lightbox) return;
+
+    setLightbox({
+      ...lightbox,
+      index: (lightbox.index + 1) % lightbox.images.length,
+    });
+  };
+
+  const prev = () => {
+    if (!lightbox) return;
+
+    setLightbox({
+      ...lightbox,
+      index:
+        lightbox.index === 0
+          ? lightbox.images.length - 1
+          : lightbox.index - 1,
+    });
+  };
+
+  const touchStart = (e: React.TouchEvent) => {
+    startX.current = e.touches[0].clientX;
+  };
+
+  const touchEnd = (e: React.TouchEvent) => {
+    if (startX.current === null) return;
+
+    const diff = e.changedTouches[0].clientX - startX.current;
+
+    if (diff > 50) prev();
+    if (diff < -50) next();
+
+    startX.current = null;
+  };
+
   return (
     <section id="arsitektur" className="section-tight bg-[rgb(var(--color-bg))]">
-
       <div className="container-main">
+        <h2 className="h2 text-[rgb(var(--color-primary))] mb-6">
+          Layanan Arsitektur
+        </h2>
 
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
-          <h2 className="h2 text-[rgb(var(--color-primary))] mb-3">
-            Layanan Arsitektur
-          </h2>
-
-          <p className="text-[12px] leading-[1.6] text-[rgb(var(--color-muted))] max-w-[520px]">
-            Perencanaan dan perancangan arsitektur yang mengintegrasikan
-            fungsi, estetika, dan keberlanjutan untuk berbagai jenis bangunan.
-          </p>
-        </motion.div>
-
-        {/* Hero */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="
-          relative
-          w-full
-          h-[220px]
-          md:h-[320px]
-          rounded-[var(--radius-lg)]
-          overflow-hidden
-          border
-          border-[rgb(var(--color-border))]
-          shadow-[var(--shadow-soft)]
-          mb-8
-          "
-        >
-          <Image
-            src={cloudinaryImage(heroImage, "banner")}
-            alt="Proyek arsitektur"
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-
-          <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/20" />
-        </motion.div>  
-
-        {/* GRID */}
         <div className="grid grid-cols-2 gap-4">
-
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-            >
-              <ArchitectureCard
-                project={project}
-                onOpenLightbox={(images, index) =>
-                  setLightbox({ images, index })
-                }
-              />
-            </motion.div>
+          {projects.map((project, i) => (
+            <ArchitectureCard
+              key={i}
+              project={project}
+              onOpenLightbox={(images, index) =>
+                setLightbox({ images, index })
+              }
+            />
           ))}
-
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* LIGHTBOX */}
       {lightbox && (
         <div
           className="
-          fixed inset-0 z-50
-          bg-black/90
+          fixed inset-0
+          bg-black/95
+          z-50
           flex items-center justify-center
-        "
+          "
           onClick={() => setLightbox(null)}
         >
-          <div className="relative w-[90vw] h-[80vh]">
-
+          <div
+            className="relative w-[92vw] h-[85vh]"
+            onClick={(e) => e.stopPropagation()}
+            onTouchStart={touchStart}
+            onTouchEnd={touchEnd}
+          >
             <Image
               src={cloudinaryImage(
                 lightbox.images[lightbox.index],
@@ -494,6 +483,24 @@ export default function ArchitectureSection() {
               className="object-contain"
             />
 
+            {/* arrows */}
+            {lightbox.images.length > 1 && (
+              <>
+                <button
+                  onClick={prev}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl"
+                >
+                  ‹
+                </button>
+
+                <button
+                  onClick={next}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl"
+                >
+                  ›
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

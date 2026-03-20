@@ -193,28 +193,28 @@ export default function ArchitectureSection() {
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773533550/kantor1_mzhksh.png";  
 
   const masjid1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534180/masjid3_tjm2tn.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021198/masjid_unjani_v1_lawl1d.jpg";  
     
   const masjid2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534176/masjid4_zhiubg.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021591/masjid2_pqu7eg.jpg";  
 
   const masjid3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534175/masjid1_gkkhzo.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021606/masjid_o9dv9l.jpg";  
 
   const masjid4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534174/masjid5_j90vee.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021503/masjid_unjani_v11_tq8jo4.jpg";  
 
   const masjid5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534173/masjid2_xkr1mr.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021497/masjid_unjani_v22_xozfbp.jpg";  
     
   const masjid6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534172/masjid6_eoyjh7.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021495/masjid_unjani_v2_cdz8o7.jpg";  
     
   const masjid7 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534171/masjid8_xuanhe.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021753/masjid_unjani_v20_zhdjue.jpg";  
     
   const masjid8 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773534170/masjid7_u2eaye.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021859/masjid_unjani_v7_avkhbq.jpg";  
         
   
 

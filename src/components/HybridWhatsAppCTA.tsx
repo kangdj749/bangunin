@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
 export default function WhatsAppCTA() {
-  const whatsappNumber = "6281322817712";
+  const whatsappNumber = "6287765505935";
   const [waLink, setWaLink] = useState<string>("");
 
   useEffect(() => {

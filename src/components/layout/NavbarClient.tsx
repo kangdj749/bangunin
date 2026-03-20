@@ -2,15 +2,13 @@
 
 import { useState, useCallback } from "react"
 import Link from "next/link"
-
+import Image from "next/image"
 import { FiMenu } from "react-icons/fi"
 
-import NavbarSearch from "@/components/search/NavbarSearch"
 import MobileMenu from "@/components/layout/MobileMenu"
-
 import { menuItems } from "@/data/menuItems"
-
 import type { BlogPost } from "@/types/blog"
+import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 interface Props {
   posts: BlogPost[]
@@ -18,8 +16,11 @@ interface Props {
 
 export default function NavbarClient({ posts }: Props) {
 
-  const [mobileOpen, setMobileOpen] = useState(false)
+  const logo =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774017311/1_BANGUN.IN_zzdfs7.png";
 
+  const [mobileOpen, setMobileOpen] = useState(false)
+  
   const handleOpen = useCallback(() => {
     setMobileOpen(true)
   }, [])
@@ -41,23 +42,17 @@ export default function NavbarClient({ posts }: Props) {
 
         <div className="container-main flex items-center justify-between h-[56px] md:h-[64px] gap-4">
 
-          {/* Brand */}
-          <Link
-            href="/"
-            className="
-            text-[15px] md:text-[16px]
-            font-semibold
-            tracking-[0.4px]
-            text-[rgb(var(--color-primary))]
-          "
-          >
-            BANGUN.IN
+         {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src={cloudinaryImage(logo, "logo")}
+              alt="Bangun.in"
+              width={120}
+              height={32}
+              className="h-[26px] md:h-[30px] w-auto object-contain"
+              priority
+            />
           </Link>
-
-          {/* Desktop Search */}
-          <div className="flex-1 max-w-[420px] hidden md:block">
-            <NavbarSearch posts={posts} />
-          </div>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex items-center gap-7 text-[12px] font-medium text-[rgb(var(--color-text))]">

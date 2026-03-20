@@ -11,6 +11,7 @@ export function cloudinaryImage(
     | "portrait"
     | "banner"
     | "icon"
+    | "logo"
     | "preview"
     | "gallery"
 ) {
@@ -29,6 +30,7 @@ export function cloudinaryImage(
     banner: "f_auto,q_auto,dpr_auto,w_1400,c_limit",
     sponsor: "f_auto,q_auto,dpr_auto,h_140,c_limit",
     icon: "f_auto,q_auto,dpr_auto,w_14,h_14,c_limit",
+    logo: "f_auto,q_auto,dpr_auto,h_64,c_limit",
     preview: "f_auto,q_auto,dpr_auto,w_360,h_240,c_fill,g_auto",
     gallery: "f_auto,q_auto,dpr_auto,w_420,h_260,c_fill,g_auto",
   };

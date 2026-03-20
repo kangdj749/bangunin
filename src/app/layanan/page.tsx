@@ -92,7 +92,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 2,
       name: "Layanan",
-      item: "https://bangun-in.com/layanan",
+      item: "https://bangunin.com/layanan",
     },
   ],
 };

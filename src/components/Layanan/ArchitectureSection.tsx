@@ -168,7 +168,7 @@ function ArchitectureCard({
 
 export default function ArchitectureSection() {
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773533546/kantor2_m1hqrp.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774022434/facade_gedung_unjani_v3_dz36a6.jpg";
 
   const sekolah1 =
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773531522/sekolah_vc9r73.png";  

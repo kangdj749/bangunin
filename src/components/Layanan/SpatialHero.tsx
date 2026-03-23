@@ -40,21 +40,20 @@ export default function SpatialHero() {
 
           {/* Micro Label */}
           <p className="text-[10px] tracking-[1.8px] uppercase font-medium text-[rgb(var(--color-white))]/70 mb-3">
-            Engineering Consultant
+            Bidang Penataan Ruang
           </p>
 
           {/* Headline */}
           <h1 className="h1 text-[rgb(var(--color-white))] mb-4">
-            Integrated Architecture,
+            Penataan Ruang yang Terencana,
             <span className="block">
-              Engineering & Construction
+              Terukur, dan Berkelanjutan
             </span>
           </h1>
 
           {/* Subheadline */}
           <p className="body text-[rgb(var(--color-white))]/85 mb-7 max-w-[520px]">
-            Konsultan teknik independen yang menghadirkan solusi terintegrasi untuk perencanaan, desain, dan manajemen konstruksi secara profesional.
-
+            Kami membantu pemerintah, pengembang, dan institusi dalam merancang tata ruang yang tidak hanya fungsional, tetapi juga menciptakan nilai jangka panjang.
           </p>
 
           {/* CTA */}
@@ -70,6 +69,7 @@ export default function SpatialHero() {
             <button
               className="
                 btn btn-outline-light
+                
               "
             >
               Portofolio

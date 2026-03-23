@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+
 import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 type Project = {
@@ -171,27 +171,71 @@ export default function ArchitectureSection() {
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774022434/facade_gedung_unjani_v3_dz36a6.jpg";
 
   const sekolah1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773531522/sekolah_vc9r73.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138867/facade_gedung_unjani_v22_rev_ugr9le.jpg";  
 
   const sekolah2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773531535/sekolah2_d0zu3b.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138866/facade_gedung_unjani_v21_bk9hml.jpg";
 
 
   const sekolah3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773532059/sekolah3_lmuwas.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138866/facade_gedung_unjani_v20_eww52u.jpg";
 
   const sekolah4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773532428/sekolah5_gkx1lb.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138862/facade_gedung_unjani_v18_zaz2yp.jpg";
 
   const sekolah5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773532429/sekolah4_dbgtli.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138861/facade_gedung_unjani_v15_yi14k6.jpg";
+
+  const sekolah6 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138861/facade_gedung_unjani_v16_l0qzhx.jpg";
+    
+  const sekolah7 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138860/facade_gedung_unjani_v14_z1szrg.jpg";
+    
+  const sekolah8 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138860/facade_gedung_unjani_v13_q9rgux.jpg";
+    
+  const sekolah9 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138854/facade_gedung_unjani_v12_gwtksl.jpg";
+    
+  const sekolah10 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138854/facade_gedung_unjani_v9_hhfput.jpg";  
 
   const kantor1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773533548/kantor2_ea9zdw.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140086/3_rsmzxd.jpg";
     
   const kantor2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773533550/kantor1_mzhksh.png";  
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140085/1_dyspwj.jpg";  
 
+  const kantor3 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140159/EKSTERIOR_SDA_V2__nosrl4.jpg";  
+
+  const kantor4 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140161/EKSTERIOR_SDA_V7__uqwucp.jpg";  
+
+  const kantor5 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140162/EKSTERIOR_SDA_V6__ysxc0b.jpg";  
+
+  const kantor6 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140162/EKSTERIOR_SDA_V1__gp0dxz.jpg";  
+
+  const kantor7 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140162/EKSTERIOR_SDA_V5__t8dqbl.jpg";  
+
+  const kantor8 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140165/EKSTERIOR_SDA_V10_ruub1e.jpg";  
+
+  const kantor9 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140167/EKSTERIOR_SDA_V11__qvu6wc.jpg";  
+
+  const kantor10 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140167/EKSTERIOR_SDA_V15__ydlirm.jpg";  
+
+  const kantor11 =
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140172/EKSTERIOR_SDA_V28_yzx92r.jpg";  
+
+  
+    
   const masjid1 =
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021198/masjid_unjani_v1_lawl1d.jpg";  
     
@@ -352,7 +396,9 @@ export default function ArchitectureSection() {
     {
       title: "Bangun Pendidikan",
       desc: "Desain fasilitas pendidikan yang fungsional dan adaptif.",
-      images: [sekolah3,sekolah1, sekolah2, sekolah4, sekolah5],
+      images: [sekolah3,sekolah1, sekolah2, sekolah4, sekolah5, sekolah6, sekolah7, sekolah8,
+        sekolah9, sekolah10
+      ],
     },
     {
       title: "Bangunan Rumah Sakit",
@@ -367,7 +413,9 @@ export default function ArchitectureSection() {
     {
       title: "Bangun Perkantoran",
       desc: "Ruang kerja profesional yang efisien dan representatif.",
-      images: [kantor1, kantor2],
+      images: [kantor1, kantor2, kantor3, kantor4,kantor5, kantor6, kantor7, kantor8,
+        kantor9, kantor10, kantor11
+      ],
     },
     
     {

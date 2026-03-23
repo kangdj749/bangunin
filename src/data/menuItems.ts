@@ -16,7 +16,7 @@ export const menuItems = [
     label: "Layanan",
     href: "/layanan",
     children: [
-      { label: "Penataan Ruang", href: "/layanan#penataan-ruang" },
+      { label: "Penataan Ruang", href: "/penataanruang" },
       { label: "Arsitektur", href: "/layanan#arsitektur" },
       { label: "Rekayasa Teknik", href: "/layanan#rekayasa" },
       { label: "Topografi & Geoteknik", href: "/layanan#topogeo" },

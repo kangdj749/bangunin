@@ -7,6 +7,7 @@ import FinalCTASection from "@/components/FinalCTASection";
 import SectionWrapper from "@/components/SectionWrapper";
 import VisualServicesPreview from "@/components/VisualServicesPreview";
 import PortfolioPreview from "@/components/PortfolioPreview";
+import EcoTourismSection from "./EcoTourismSection";
 
 /* ================================
    STRUCTURED DATA
@@ -67,6 +68,9 @@ export default function HomeClient() {
         <VisualServicesPreview />
 
         <PortfolioPreview />
+
+        <EcoTourismSection />
+
 
         <SectionWrapper withDivider={false}>
           <FinalCTASection />

@@ -132,27 +132,83 @@ body {
 
 .caption {
   font-size: 12.5px;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+
   color: rgb(var(--color-muted));
 }
 
+.caption-light {
+  font-size: 12.5px;
+  line-height: 1.5;
+  letter-spacing: 0.3px;
+
+  color: rgb(var(--color-white) / 0.7);
+}
+
+.caption-subtle {
+  font-size: 12px;
+  line-height: 1.5;
+
+  color: rgb(var(--color-subtle));
+}
+
+.caption-label {
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
 
 /* ======================================================
    BUTTON (IMPROVED FEEL)
 ====================================================== */
 
-.btn-primary {
-  background: rgb(var(--color-primary));
-  color: rgb(var(--color-white));
-  padding: 10px 22px;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 8px 16px;
   border-radius: var(--radius-md);
+
+  font-size: 12.5px;
   font-weight: 500;
-  font-size: 13.5px;
-  letter-spacing: 0.4px;
-  transition: all 0.25s ease;
+  letter-spacing: 0.25px;
+
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  will-change: transform;
+}
+
+.btn-primary {
+  background: rgb(var(--color-primary) / 1);
+  color: rgb(var(--color-white));
+
   box-shadow: var(--shadow-soft);
 }
 
 .btn-primary:hover {
+  background: rgb(var(--color-primary) / 0.9);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-medium);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary-dark {
+  background: rgb(var(--color-white));
+  color: rgb(var(--color-dark));
+
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary-dark:hover {
+  background: rgb(var(--color-white) / 0.9);
   transform: translateY(-1px);
   box-shadow: var(--shadow-medium);
 }
@@ -160,10 +216,7 @@ body {
 .btn-outline {
   border: 1px solid rgb(var(--color-border-strong));
   color: rgb(var(--color-text));
-  padding: 10px 22px;
-  border-radius: var(--radius-md);
-  font-size: 13px;
-  transition: all 0.25s ease;
+  background: transparent;
 }
 
 .btn-outline:hover {
@@ -172,6 +225,25 @@ body {
   border-color: rgb(var(--color-primary));
 }
 
+.btn-outline-light {
+  border: 1px solid rgb(var(--color-white) / 0.5);
+  color: rgb(var(--color-white));
+  background: transparent;
+}
+
+.btn-outline-light:hover {
+  background: rgb(var(--color-white));
+  color: rgb(var(--color-dark));
+}
+
+.btn-soft {
+  background: rgb(var(--color-primary) / 0.08);
+  color: rgb(var(--color-primary));
+}
+
+.btn-soft:hover {
+  background: rgb(var(--color-primary) / 0.16);
+}
 
 /* ======================================================
    CARD SYSTEM (UPGRADE)

@@ -59,10 +59,10 @@ export default function TrustStrip() {
                 <div className="flex justify-center mb-3">
                   <div
                     className="
-                      w-9 h-9
+                      w-10 h-10
                       flex items-center justify-center
-                      rounded-[var(--radius-sm)]
-                      border
+                      rounded-[var(--radius-md)]
+                      border  
                       border-[rgb(var(--color-secondary))]/25
                       bg-[rgb(var(--color-surface))]
                       transition-all
@@ -82,7 +82,7 @@ export default function TrustStrip() {
                 <div className="mx-auto w-6 h-[1px] bg-[rgb(var(--color-primary))] mb-3 transition-all duration-300 group-hover:w-8" />
 
                 {/* Label */}
-                <p className="text-[12px] md:text-[12.5px] font-medium leading-[1.55] text-[rgb(var(--color-text))]">
+                <p className="text-[13px] md:text-[13.5px] font-medium leading-[1.6] text-[rgb(var(--color-text))]">
                   {item.label}
                 </p>
               </div>
@@ -91,7 +91,7 @@ export default function TrustStrip() {
         </div>
 
         {/* Bottom Support Text */}
-        <p className="text-center text-[11px] md:text-[11.5px] text-[rgb(var(--color-muted))] mt-8 max-w-2xl mx-auto leading-[1.6]">
+        <p className="text-center text-[12px] text-[rgb(var(--color-muted))] mt-10 max-w-[640px] mx-auto leading-[1.6]">
           Didukung tenaga ahli dari berbagai institusi teknik terkemuka serta
           pengalaman proyek skala nasional.
         </p>

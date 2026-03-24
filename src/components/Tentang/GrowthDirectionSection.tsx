@@ -27,74 +27,93 @@ export default function GrowthDirectionSection() {
   ];
 
   return (
-    <section id="arah" className="section-tight bg-[rgb(var(--color-soft))]">
+    <section id="arah" className="section-tight bg-soft">
       <div className="container-main">
 
-        {/* Headline */}
-        <motion.h2
-          initial={{ opacity: 0, y: 6 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="h2 text-primary mb-3"
-        >
-          Arah Pertumbuhan
-        </motion.h2>
+        {/* HEADER */}
+        <div className="max-w-[560px] mb-8">
 
-        {/* Intro */}
-        <motion.p
-          initial={{ opacity: 0, y: 6 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.05 }}
-          className="caption max-w-xl mb-6 leading-[1.6]"
-        >
-          Strategi pengembangan perusahaan difokuskan pada peningkatan
-          kapabilitas teknis, sistem manajemen modern, serta adaptasi terhadap
-          dinamika industri konstruksi yang berkembang.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 6 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="caption uppercase tracking-[1.4px] text-primary mb-3"
+          >
+            Strategi Perusahaan
+          </motion.p>
 
-        {/* Growth Items */}
-        <div className="space-y-3">
+          <motion.h2
+            initial={{ opacity: 0, y: 6 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="h2 text-primary mb-4"
+          >
+            Arah Pertumbuhan
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 6 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="body text-muted"
+          >
+            Strategi pengembangan difokuskan pada peningkatan kapabilitas teknis,
+            penguatan sistem manajemen modern, serta adaptasi terhadap dinamika
+            industri konstruksi yang terus berkembang.
+          </motion.p>
+
+        </div>
+
+        {/* LIST */}
+        <div className="space-y-4">
+
           {growthPoints.map((item, idx) => {
             const Icon = item.icon;
 
             return (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 * idx }}
+                transition={{ duration: 0.45, delay: 0.1 * idx }}
                 className="
                   relative
-                  bg-[rgb(var(--color-surface))]
                   border border-[rgb(var(--color-border))]
-                  rounded-[var(--radius-md)]
-                  px-4 py-4
+                  rounded-[var(--radius-lg)]
+                  p-5
+                  bg-[rgb(var(--color-surface))]
                   shadow-[var(--shadow-soft)]
-                  hover:shadow-[var(--shadow-elevated)]
+                  hover:shadow-[var(--shadow-medium)]
+                  hover:border-[rgb(var(--color-border-strong))]
                   transition-all duration-300
                 "
               >
-                {/* Accent Strip */}
-                <div className="absolute left-0 top-0 h-full w-[3px] bg-[rgb(var(--color-primary))] rounded-l-[var(--radius-md)]" />
 
-                <div className="flex items-start gap-3 pl-2">
+                {/* Accent */}
+                <div className="absolute left-0 top-0 h-full w-[3px] bg-primary rounded-l-[var(--radius-lg)]" />
+
+                <div className="flex items-start gap-4 pl-2">
 
                   {/* Icon */}
-                  <div className="text-[rgb(var(--color-primary))] mt-[2px]">
-                    <Icon size={18} strokeWidth={1.5} />
+                  <div className="text-primary mt-[2px]">
+                    <Icon size={20} strokeWidth={1.6} />
                   </div>
 
-                  {/* Text */}
-                  <div>
-                    <h3 className="text-[12.5px] font-semibold mb-1">
+                  {/* Content */}
+                  <div className="flex-1">
+
+                    <h3 className="h3 text-[rgb(var(--color-text))] mb-2">
                       {item.title}
                     </h3>
-                    <p className="text-[11.5px] leading-[1.55] text-[rgb(var(--color-muted))]">
+
+                    <p className="caption leading-[1.65] text-muted">
                       {item.desc}
                     </p>
+
                   </div>
 
                 </div>
@@ -102,6 +121,7 @@ export default function GrowthDirectionSection() {
               </motion.div>
             );
           })}
+
         </div>
 
       </div>

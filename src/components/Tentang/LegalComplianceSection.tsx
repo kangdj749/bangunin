@@ -14,69 +14,87 @@ export default function LegalComplianceSection() {
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565509/legal_jz8hzg.jpg";
 
   return (
-    <section id="legalitas" className="relative py-12 md:py-20 bg-[rgb(var(--color-bg))]">
-      <div className="container-main grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+    <section id="legalitas" className="section-tight bg-[rgb(var(--color-bg))]">
+      <div className="container-main grid gap-10 md:gap-14 md:grid-cols-2 items-center">
 
-        {/* Left Column — Statement */}
+        {/* LEFT — TEXT */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-[520px]"
         >
-          <h2 className="text-[20px] md:text-[26px] font-semibold leading-[1.35] tracking-[0.2px] text-[rgb(var(--color-primary))] mb-5">
+          {/* Label */}
+          <p className="caption uppercase tracking-[1.4px] text-primary mb-3">
+            Legalitas Perusahaan
+          </p>
+
+          {/* Heading */}
+          <h2 className="h2 text-primary mb-4">
             Legalitas Resmi & Terverifikasi
           </h2>
-          <p className="text-[12px] md:text-[13px] leading-[1.65] text-[rgb(var(--color-text))]/85">
-            Beroperasi secara sah dan efektif berdasarkan perizinan resmi 
-            Pemerintah Republik Indonesia melalui sistem OSS.
+
+          {/* Description */}
+          <p className="body text-muted leading-[1.7]">
+            Perusahaan beroperasi secara sah dan efektif berdasarkan
+            perizinan resmi Pemerintah Republik Indonesia melalui sistem
+            Online Single Submission (OSS), serta memenuhi ketentuan
+            regulasi yang berlaku.
           </p>
         </motion.div>
 
-        {/* Right Column — Cards & Image */}
+        {/* RIGHT — CONTENT */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-col gap-4 md:gap-5"
+          transition={{ duration: 0.5, delay: 0.05 }}
+          className="flex flex-col gap-4"
         >
-          {/* Document Cards */}
-          {legalDocs.map((doc, idx) => (
-            <div
-              key={idx}
-              className="
-                bg-[rgb(var(--color-surface))]
-                border border-[rgb(var(--color-border))]
-                rounded-[var(--radius-lg)]
-                p-5
-                shadow-[var(--shadow-soft)]
-                hover:shadow-[var(--shadow-elevated)]
-                hover:border-[rgb(var(--color-border-strong))]
-                transition-all duration-300
-                text-center
-              "
-            >
-              <h3 className="text-[12.5px] font-semibold tracking-[0.5px] text-[rgb(var(--color-primary))] mb-1">
-                {doc.title}
-              </h3>
-              <p className="text-[11px] text-[rgb(var(--color-text))]/80 leading-[1.5]">
-                {doc.number}
-              </p>
-            </div>
-          ))}
 
-          {/* Legal Document Blur Image */}
-          <div className="relative w-full h-40 md:h-48 rounded-xl overflow-hidden shadow-[0_8px_25px_-8px_rgba(0,0,0,0.1)]">
+          {/* Cards */}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {legalDocs.map((doc, idx) => (
+              <div
+                key={idx}
+                className="
+                  border border-[rgb(var(--color-border))]
+                  rounded-[var(--radius-lg)]
+                  p-4
+                  bg-[rgb(var(--color-surface))]
+                  shadow-[var(--shadow-soft)]
+                  hover:shadow-[var(--shadow-medium)]
+                  hover:border-[rgb(var(--color-border-strong))]
+                  transition-all duration-300
+                "
+              >
+                <p className="text-[11px] font-medium text-[rgb(var(--color-subtle))] mb-1 tracking-[0.4px]">
+                  {doc.title}
+                </p>
+
+                <p className="text-[13.5px] font-medium text-[rgb(var(--color-text))] leading-[1.5]">
+                  {doc.number}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Image */}
+          <div className="relative w-full h-40 md:h-48 rounded-[var(--radius-lg)] overflow-hidden border border-[rgb(var(--color-border))] shadow-[var(--shadow-soft)]">
             <Image
               src={documentImage}
-              alt="Dokumen Legal Blur Aesthetic"
+              alt="Dokumen legal perusahaan"
               fill
-              sizes="100vw"
-              className="object-cover filter blur-sm"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
               priority
             />
+
+            {/* Overlay biar lebih premium */}
+            <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/10" />
           </div>
+
         </motion.div>
 
       </div>

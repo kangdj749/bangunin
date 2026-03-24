@@ -6,10 +6,10 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function HeroAboutSection() {
   const heroImage =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png"; // ganti dengan foto tim meeting / blueprint
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png";
 
   return (
-    <section className="relative min-h-[360px] md:min-h-[460px] flex items-center overflow-hidden bg-[rgb(var(--color-bg))]">
+    <section className="relative min-h-[380px] md:min-h-[480px] flex items-center overflow-hidden">
 
       {/* Background */}
       <div className="absolute inset-0">
@@ -23,35 +23,34 @@ export default function HeroAboutSection() {
         />
       </div>
 
-      {/* Clean Overlay (lebih ringan & premium) */}
-      <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/45" />
+      {/* Overlay (lebih premium & subtle) */}
+      <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/50" />
 
-      {/* Subtle Bottom Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-[rgb(var(--color-bg))]" />
+      {/* Depth gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-[rgb(var(--color-dark))]/20 to-[rgb(var(--color-dark))]/40" />
 
-      <div className="container-main relative z-10 py-12 md:py-16">
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-[rgb(var(--color-bg))]" />
+
+      <div className="container-main relative z-10">
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-[520px]"
+          className="max-w-[560px]"
         >
-          {/* Micro Label */}
-          <p className="text-[9px] tracking-[1.6px] uppercase font-medium text-[rgb(var(--color-white))]/70 mb-3">
+
+          {/* Eyebrow */}
+          <p className="text-[10px] tracking-[1.6px] uppercase font-medium text-[rgb(var(--color-white))]/70 mb-3">
             Tentang Perusahaan
           </p>
 
-          {/* Headline */}
-          <h1 className="
-            text-[18px] 
-            md:text-[26px] 
-            font-semibold 
-            leading-[1.35] 
-            tracking-[0.2px] 
-            text-[rgb(var(--color-white))] 
-            mb-4
-          ">
+          {/* Divider */}
+          <div className="w-10 h-[2px] bg-[rgb(var(--color-primary))] mb-4" />
+
+          {/* Heading */}
+          <h1 className="h1 text-[rgb(var(--color-white))] mb-3">
             Membangun Fondasi
             <span className="block">
               Keunggulan Profesional
@@ -59,17 +58,13 @@ export default function HeroAboutSection() {
           </h1>
 
           {/* Subheadline */}
-          <p className="
-            text-[11px] 
-            md:text-[13px] 
-            leading-[1.65] 
-            text-[rgb(var(--color-white))]/80
-          ">
+          <p className="body text-[rgb(var(--color-white))]/80 max-w-[480px]">
             Integrasi arsitektur, rekayasa teknik, dan manajemen konstruksi 
             dalam satu sistem kerja profesional dan terstruktur.
           </p>
 
         </motion.div>
+
       </div>
     </section>
   );

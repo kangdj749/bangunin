@@ -8,44 +8,47 @@ export default function CTASection() {
       <div className="container-main">
 
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.45 }}
           className="
+            max-w-[720px]
+            mx-auto
+            text-center
             border border-[rgb(var(--color-border))]
             rounded-[var(--radius-lg)]
-            px-5 py-8
+            px-6 py-10 md:px-10 md:py-12
             bg-[rgb(var(--color-soft))]
             shadow-[var(--shadow-soft)]
-            text-center
           "
         >
 
           {/* Label */}
-          <p className="text-[11px] tracking-[0.12em] uppercase text-[rgb(var(--color-muted))] mb-2">
+          <p className="caption uppercase tracking-[1.4px] text-subtle mb-3">
             Konsultasi Proyek
           </p>
 
-          {/* Headline */}
-          <h2 className="text-[16px] sm:text-[18px] font-semibold mb-3 text-[rgb(var(--color-primary))]">
+          {/* Heading */}
+          <h2 className="h2 text-primary mb-4">
             Diskusikan Kebutuhan Proyek Anda
           </h2>
 
-          {/* Supporting Text */}
-          <p className="text-[12px] leading-[1.6] text-[rgb(var(--color-muted))] max-w-md mx-auto mb-6">
-            Tim kami siap membantu Anda merencanakan dan merealisasikan proyek
-            konstruksi secara profesional, terukur, dan sesuai regulasi yang berlaku.
+          {/* Description */}
+          <p className="body text-muted max-w-[560px] mx-auto mb-8">
+            Tim kami siap membantu merencanakan dan merealisasikan proyek
+            konstruksi secara profesional, terukur, serta sesuai dengan
+            regulasi yang berlaku.
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row sm:justify-center gap-3">
 
-            <a href="#contact" className="btn-primary">
+            <a href="#contact" className="btn btn-primary">
               Jadwalkan Diskusi
             </a>
 
-            <a href="#portfolio" className="btn-outline">
+            <a href="#portfolio" className="btn btn-outline">
               Lihat Portofolio
             </a>
 

@@ -36,25 +36,21 @@ export default function ContactFormSection() {
         throw new Error(json.error || "Gagal mengirim data");
       }
 
-      /* ========================= */
-      /* WhatsApp Message Builder */
-      /* ========================= */
-
       const message = `
-        Halo Admin,
+Halo Admin,
 
-        Ada permohonan konsultasi baru.
+Ada permohonan konsultasi baru.
 
-        Nama : ${data.fullName}
-        Instansi : ${data.instansi}
-        Jenis Proyek : ${data.jenis_proyek}
-        Lokasi Proyek : ${data.lokasi_proyek}
+Nama : ${data.fullName}
+Instansi : ${data.instansi}
+Jenis Proyek : ${data.jenis_proyek}
+Lokasi Proyek : ${data.lokasi_proyek}
 
-        Deskripsi :
-        ${data.deskripsi_singkat}
+Deskripsi :
+${data.deskripsi_singkat}
 
-        Kontak Client :
-        ${data.phone}
+Kontak Client :
+${data.phone}
       `;
 
       const waURL = `https://wa.me/${ADMIN_WA}?text=${encodeURIComponent(
@@ -62,7 +58,6 @@ export default function ContactFormSection() {
       )}`;
 
       reset();
-
       window.location.href = waURL;
     } catch (error) {
       alert(error instanceof Error ? error.message : "Terjadi kesalahan");
@@ -75,7 +70,6 @@ export default function ContactFormSection() {
     label: string;
     field: keyof FormValues;
     type: string;
-    textarea?: boolean;
   }> = [
     { label: "Nama Lengkap", field: "fullName", type: "text" },
     { label: "Instansi / Perusahaan", field: "instansi", type: "text" },
@@ -88,34 +82,35 @@ export default function ContactFormSection() {
     <section id="consultation-form" className="section-tight">
       <div className="container-main">
 
-        {/* Header */}
+        {/* ================= HEADER ================= */}
 
-        <div className="max-w-[520px] mb-8">
+        <div className="max-w-[520px] mb-10">
 
-          <p className="text-[10px] tracking-[1.6px] uppercase font-medium text-[rgb(var(--color-primary))] mb-3">
+          <p className="text-[10px] tracking-[1.6px] uppercase font-medium text-primary mb-3">
             Konsultasi Proyek
           </p>
 
-          <div className="w-10 h-[2px] bg-[rgb(var(--color-primary))] mb-4" />
+          <div className="w-10 h-[2px] bg-primary mb-4" />
 
-          <h2 className="text-[18px] sm:text-[20px] font-semibold leading-[1.35] text-[rgb(var(--color-text))]">
+          <h2 className="h2 text-[rgb(var(--color-text))] mb-3">
             Ajukan Permohonan Konsultasi
           </h2>
 
-          <p className="text-[12.5px] text-[rgb(var(--color-muted))] leading-[1.7] mt-3">
-            Sampaikan kebutuhan proyek Anda melalui formulir berikut.
-            Tim kami akan menghubungi Anda untuk diskusi awal dan
+          <p className="body text-muted max-w-[460px]">
+            Sampaikan kebutuhan proyek Anda melalui formulir berikut. 
+            Tim kami akan menghubungi Anda untuk diskusi awal dan 
             penjadwalan konsultasi.
           </p>
 
         </div>
 
-        {/* Form */}
+        {/* ================= FORM ================= */}
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid gap-4 md:grid-cols-2 text-[12.5px]"
+          className="grid gap-4 md:grid-cols-2"
         >
+
           {formFields.map((item) => (
             <div key={item.field} className="flex flex-col gap-1.5">
 
@@ -127,22 +122,28 @@ export default function ContactFormSection() {
                 type={item.type}
                 {...register(item.field, { required: true })}
                 className="
-                h-[38px]
-                px-3
-                rounded-md
-                border
-                border-[rgb(var(--color-border))]
-                bg-[rgb(var(--color-bg))]
-                text-[rgb(var(--color-text))]
-                focus:outline-none
-                focus:ring-2
-                focus:ring-[rgb(var(--color-primary))]/30
+                  h-[36px]
+                  px-3
+                  rounded-[var(--radius-sm)]
+                  border
+                  border-[rgb(var(--color-border))]
+                  bg-[rgb(var(--color-bg))]
+                  text-[rgb(var(--color-text))]
+                  text-[12.5px]
+                  transition-all
+                  duration-200
+
+                  focus:outline-none
+                  focus:border-[rgb(var(--color-primary))]
+                  focus:ring-2
+                  focus:ring-[rgb(var(--color-primary))]/15
                 "
               />
+
             </div>
           ))}
 
-          {/* Deskripsi */}
+          {/* TEXTAREA */}
 
           <div className="md:col-span-2 flex flex-col gap-1.5">
 
@@ -154,41 +155,40 @@ export default function ContactFormSection() {
               rows={4}
               {...register("deskripsi_singkat")}
               className="
-              px-3 py-2
-              rounded-md
-              border
-              border-[rgb(var(--color-border))]
-              bg-[rgb(var(--color-bg))]
-              text-[rgb(var(--color-text))]
-              focus:outline-none
-              focus:ring-2
-              focus:ring-[rgb(var(--color-primary))]/30
+                px-3 py-2
+                rounded-[var(--radius-sm)]
+                border
+                border-[rgb(var(--color-border))]
+                bg-[rgb(var(--color-bg))]
+                text-[rgb(var(--color-text))]
+                text-[12.5px]
+                leading-[1.6]
+                transition-all
+                duration-200
+
+                focus:outline-none
+                focus:border-[rgb(var(--color-primary))]
+                focus:ring-2
+                focus:ring-[rgb(var(--color-primary))]/15
               "
             />
 
           </div>
 
-          {/* Button */}
+          {/* BUTTON */}
 
-          <button
-            type="submit"
-            disabled={submitting}
-            className="
-            md:col-span-2
-            h-[40px]
-            mt-2
-            rounded-md
-            bg-[rgb(var(--color-primary))]
-            text-[rgb(var(--color-white))]
-            text-[12.5px]
-            font-medium
-            hover:opacity-90
-            transition
-            disabled:opacity-60
-            "
-          >
-            {submitting ? "Mengirim..." : "Kirim Permohonan"}
-          </button>
+          <div className="md:col-span-2 pt-2">
+            <button
+              type="submit"
+              disabled={submitting}
+              className="
+                btn btn-primary
+                
+              "
+            >
+              {submitting ? "Mengirim..." : "Kirim Permohonan"}
+            </button>
+          </div>
 
         </form>
 

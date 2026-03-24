@@ -8,6 +8,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import VisualServicesPreview from "@/components/VisualServicesPreview";
 import PortfolioPreview from "@/components/PortfolioPreview";
 import EcoTourismSection from "./EcoTourismSection";
+import HeroPremium from "./layout/HeroPremium";
 
 /* ================================
    STRUCTURED DATA
@@ -61,7 +62,7 @@ export default function HomeClient() {
       />
 
       <main className="relative">
-        <Hero />
+        <HeroPremium />
 
         <TrustStrip />
 

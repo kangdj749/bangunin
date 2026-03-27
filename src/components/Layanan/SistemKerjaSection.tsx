@@ -1,19 +1,37 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import {
   FiClipboard,
   FiUsers,
   FiTool,
   FiDollarSign,
 } from "react-icons/fi";
+import { ReactNode } from "react";
+
+type Pillar = {
+  title: string;
+  icon: ReactNode;
+  items: string[];
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
 export default function SistemKerjaSection() {
-
-  const pillars = [
+  const pillars: Pillar[] = [
     {
       title: "Administrasi Proyek",
-      icon: <FiClipboard size={18} />,
+      icon: <FiClipboard size={16} />,
       items: [
         "Perencanaan jadwal pekerjaan",
         "Dokumentasi teknis proyek",
@@ -23,7 +41,7 @@ export default function SistemKerjaSection() {
     },
     {
       title: "Manajemen SDM",
-      icon: <FiUsers size={18} />,
+      icon: <FiUsers size={16} />,
       items: [
         "Tim ahli multidisiplin",
         "Distribusi tugas profesional",
@@ -33,7 +51,7 @@ export default function SistemKerjaSection() {
     },
     {
       title: "Pelaksanaan Teknis",
-      icon: <FiTool size={18} />,
+      icon: <FiTool size={16} />,
       items: [
         "Survey dan analisis teknis",
         "Perencanaan desain detail",
@@ -43,7 +61,7 @@ export default function SistemKerjaSection() {
     },
     {
       title: "Kontrol Keuangan",
-      icon: <FiDollarSign size={18} />,
+      icon: <FiDollarSign size={16} />,
       items: [
         "Perencanaan anggaran proyek",
         "Monitoring biaya pekerjaan",
@@ -54,98 +72,107 @@ export default function SistemKerjaSection() {
   ];
 
   return (
-    <section id="sistem-kerja" className="section-tight bg-[rgb(var(--color-surface))]">
-
+    <section
+      id="sistem-kerja"
+      className="section-tight bg-[rgb(var(--color-surface))]"
+    >
       <div className="container-main">
-
-        {/* Header */}
+        {/* ================= HEADER ================= */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
+          className="mb-10 max-w-[640px]"
         >
-          <h2 className="h2 text-[rgb(var(--color-primary))] mb-3">
-            Sistem Kerja Profesional
+          {/* Label */}
+          <p className="caption caption-label text-[rgb(var(--color-primary))] mb-3">
+            Sistem Kerja
+          </p>
+
+          <h2 className="h2 text-[rgb(var(--color-text))] mb-4">
+            Sistem Kerja Profesional & Terstruktur
           </h2>
 
-          <p className="text-[12px] leading-[1.6] text-[rgb(var(--color-muted))] max-w-[520px]">
-            Setiap proyek dikelola melalui sistem kerja yang terstruktur,
-            mengintegrasikan aspek administrasi, sumber daya manusia,
-            pelaksanaan teknis, dan kontrol keuangan untuk memastikan
-            hasil yang profesional dan akuntabel.
+          <p className="body text-[rgb(var(--color-muted))]">
+            Setiap proyek dikelola melalui pendekatan sistematis yang
+            mengintegrasikan administrasi, sumber daya manusia,
+            pelaksanaan teknis, serta kontrol keuangan untuk memastikan
+            hasil yang akurat, efisien, dan dapat dipertanggungjawabkan.
           </p>
         </motion.div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
+        {/* ================= GRID ================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           {pillars.map((pillar, index) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={pillar.title}
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.06 }}
+              transition={{ delay: index * 0.06 }}
               className="
-                bg-[rgb(var(--color-bg))]
+                group
+                relative
+                rounded-[var(--radius-lg)]
                 border
                 border-[rgb(var(--color-border))]
-                rounded-[var(--radius-md)]
-                p-4
-                shadow-[var(--shadow-sm)]
+                bg-[rgb(var(--color-bg))]
+                p-5
+                shadow-[var(--shadow-soft)]
                 transition-all
                 duration-300
-                hover:shadow-[var(--shadow-md)]
+                hover:-translate-y-[3px]
+                hover:shadow-[var(--shadow-medium)]
+                hover:border-[rgb(var(--color-border-strong))]
               "
             >
+              {/* Accent line */}
+              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[rgb(var(--color-primary))]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Header */}
-              <div className="flex items-center gap-2 mb-3">
-
+              <div className="flex items-center gap-3 mb-4">
                 <div
                   className="
-                  w-[34px]
-                  h-[34px]
-                  flex
-                  items-center
-                  justify-center
-                  rounded-[var(--radius-sm)]
-                  bg-[rgb(var(--color-primary))]/10
-                  text-[rgb(var(--color-primary))]
-                "
+                    w-[36px]
+                    h-[36px]
+                    flex
+                    items-center
+                    justify-center
+                    rounded-[var(--radius-md)]
+                    bg-[rgb(var(--color-primary))]/10
+                    text-[rgb(var(--color-primary))]
+                    transition-all
+                    duration-300
+                    group-hover:bg-[rgb(var(--color-primary))]
+                    group-hover:text-[rgb(var(--color-white))]
+                  "
                 >
                   {pillar.icon}
                 </div>
 
-                <h3 className="text-[13px] font-semibold text-[rgb(var(--color-text))]">
+                <h3 className="text-[14px] font-semibold text-[rgb(var(--color-text))]">
                   {pillar.title}
                 </h3>
-
               </div>
 
               {/* Items */}
-              <ul className="space-y-[3px]">
-
+              <ul className="space-y-2">
                 {pillar.items.map((item, i) => (
                   <li
                     key={i}
-                    className="text-[11px] leading-[1.55] text-[rgb(var(--color-muted))]"
+                    className="flex items-start gap-2 text-[12px] leading-[1.6] text-[rgb(var(--color-muted))]"
                   >
-                    • {item}
+                    <span className="mt-[6px] w-[4px] h-[4px] rounded-full bg-[rgb(var(--color-primary))]/60" />
+                    <span>{item}</span>
                   </li>
                 ))}
-
               </ul>
-
             </motion.div>
           ))}
-
         </div>
-
       </div>
-
     </section>
   );
 }

@@ -1,7 +1,7 @@
 export const heroSlides = [
   {
     image:
-      "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png",
+      "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774597368/rekayasa_tvkzi7.jpg",
     title: "Solusi Arsitektur Terintegrasi",
     subtitle:
       "Perencanaan desain yang presisi, estetis, dan berorientasi pada keberlanjutan proyek.",
@@ -10,7 +10,7 @@ export const heroSlides = [
   },
   {
     image:
-      "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565282/sinergy_l0dwjh.jpg",
+      "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774597400/topografi_zaod2m.jpg",
     title: "Rekayasa Teknik & Perencanaan Konstruksi",
     subtitle:
       "Pendekatan teknis berbasis standar profesional untuk memastikan efisiensi dan kualitas pembangunan.",
@@ -19,7 +19,7 @@ export const heroSlides = [
   },
   {
     image:
-      "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565509/legal_jz8hzg.jpg",
+      "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565282/sinergy_l0dwjh.jpg",
     title: "Manajemen Proyek & Pengawasan",
     subtitle:
       "Kontrol terukur, transparansi, dan koordinasi optimal dalam setiap tahapan konstruksi.",

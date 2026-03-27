@@ -7,7 +7,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function HeroArchitecture() {
   const image =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565509/legal_jz8hzg.jpg";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774597368/rekayasa_tvkzi7.jpg";
 
   return (
     <section className="relative overflow-hidden bg-[rgb(var(--color-dark))]">

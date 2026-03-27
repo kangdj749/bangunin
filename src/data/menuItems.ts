@@ -16,10 +16,10 @@ export const menuItems = [
     label: "Layanan",
     href: "/layanan",
     children: [
-      { label: "Penataan Ruang", href: "/layanan/penataanruang" },
+      { label: "Penataan Ruang", href: "/layanan/penataan-ruang" },
       { label: "Arsitektur", href: "/layanan/arsitektur" },
-      { label: "Rekayasa Teknik", href: "/layanan/rekayasateknik" },
-      { label: "Topografi & Geoteknik", href: "/layanan#topogeo" },
+      { label: "Rekayasa Teknik", href: "/layanan/rekayasa-teknik" },
+      { label: "Topografi & Geoteknik", href: "/layanan/topografi-geoteknik" },
       { label: "Sistem Kerja Profesional", href: "/layanan#sistem-kerja" },
     ],
   },

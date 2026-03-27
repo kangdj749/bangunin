@@ -1,609 +1,177 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
-
+import Link from "next/link";
+import { motion } from "framer-motion";
 import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 type Project = {
   title: string;
   desc: string;
-  images: string[];
+  image: string;
 };
-
-/* ================= CARD ================= */
-
-function ArchitectureCard({
-  project,
-  onOpenLightbox,
-}: {
-  project: Project;
-  onOpenLightbox: (images: string[], index: number) => void;
-}) {
-  const [slide, setSlide] = useState(0);
-  const startX = useRef<number | null>(null);
-
-  const total = project.images.length;
-
-  const next = () => setSlide((s) => (s + 1) % total);
-  const prev = () => setSlide((s) => (s === 0 ? total - 1 : s - 1));
-
-  /* autoplay */
-  useEffect(() => {
-    if (total <= 1) return;
-
-    const interval = setInterval(() => {
-      setSlide((s) => (s + 1) % total);
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [total]);
-
-  /* swipe */
-  const handleTouchStart = (e: React.TouchEvent) => {
-    startX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (startX.current === null) return;
-
-    const diff = e.changedTouches[0].clientX - startX.current;
-
-    if (diff > 50) prev();
-    if (diff < -50) next();
-
-    startX.current = null;
-  };
-
-  return (
-    <div
-      className="
-      bg-[rgb(var(--color-surface))]
-      border border-[rgb(var(--color-border))]
-      rounded-[var(--radius-md)]
-      overflow-hidden
-      shadow-[var(--shadow-soft)]
-      hover:shadow-[var(--shadow-elevated)]
-      transition-all
-    "
-    >
-      {/* slider */}
-      <div
-        className="relative h-[200px] overflow-hidden"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div
-          className="flex h-full transition-transform duration-500"
-          style={{
-            transform: `translate3d(-${slide * 100}%,0,0)`,
-          }}
-        >
-          {project.images.map((img, i) => (
-            <div
-              key={i}
-              className="relative w-full flex-shrink-0"
-              onClick={() => onOpenLightbox(project.images, i)}
-            >
-              <Image
-                src={cloudinaryImage(img, "preview")}
-                alt={project.title}
-                fill
-                sizes="(max-width:768px) 50vw, 33vw"
-                className="object-cover cursor-pointer"
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* arrows */}
-        {total > 1 && (
-          <>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                prev();
-              }}
-              className="
-              absolute left-2 top-1/2 -translate-y-1/2
-              w-7 h-7 rounded-full
-              bg-white/80
-              text-[13px]
-              flex items-center justify-center
-            "
-            >
-              ‹
-            </button>
-
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                next();
-              }}
-              className="
-              absolute right-2 top-1/2 -translate-y-1/2
-              w-7 h-7 rounded-full
-              bg-white/80
-              text-[13px]
-              flex items-center justify-center
-            "
-            >
-              ›
-            </button>
-          </>
-        )}
-
-        {/* indicator */}
-        {total > 1 && (
-          <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
-            {project.images.map((_, i) => (
-              <div
-                key={i}
-                className={`h-[4px] rounded-full transition-all ${
-                  slide === i
-                    ? "w-[16px] bg-[rgb(var(--color-primary))]"
-                    : "w-[6px] bg-white/70"
-                }`}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* text */}
-      <div className="p-3">
-        <h3 className="text-[12.5px] font-semibold text-[rgb(var(--color-text))] mb-1">
-          {project.title}
-        </h3>
-
-        <p className="text-[11px] leading-[1.5] text-[rgb(var(--color-muted))]">
-          {project.desc}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-/* ================= SECTION ================= */
 
 export default function ArchitectureSection() {
   const heroImage =
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774022434/facade_gedung_unjani_v3_dz36a6.jpg";
 
-  const sekolah1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138867/facade_gedung_unjani_v22_rev_ugr9le.jpg";  
-
-  const sekolah2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138866/facade_gedung_unjani_v21_bk9hml.jpg";
-
-
-  const sekolah3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138866/facade_gedung_unjani_v20_eww52u.jpg";
-
-  const sekolah4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138862/facade_gedung_unjani_v18_zaz2yp.jpg";
-
-  const sekolah5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138861/facade_gedung_unjani_v15_yi14k6.jpg";
-
-  const sekolah6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138861/facade_gedung_unjani_v16_l0qzhx.jpg";
-    
-  const sekolah7 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138860/facade_gedung_unjani_v14_z1szrg.jpg";
-    
-  const sekolah8 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138860/facade_gedung_unjani_v13_q9rgux.jpg";
-    
-  const sekolah9 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138854/facade_gedung_unjani_v12_gwtksl.jpg";
-    
-  const sekolah10 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138854/facade_gedung_unjani_v9_hhfput.jpg";  
-
-  const kantor1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140086/3_rsmzxd.jpg";
-    
-  const kantor2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140085/1_dyspwj.jpg";  
-
-  const kantor3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140159/EKSTERIOR_SDA_V2__nosrl4.jpg";  
-
-  const kantor4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140161/EKSTERIOR_SDA_V7__uqwucp.jpg";  
-
-  const kantor5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140162/EKSTERIOR_SDA_V6__ysxc0b.jpg";  
-
-  const kantor6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140162/EKSTERIOR_SDA_V1__gp0dxz.jpg";  
-
-  const kantor7 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140162/EKSTERIOR_SDA_V5__t8dqbl.jpg";  
-
-  const kantor8 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140165/EKSTERIOR_SDA_V10_ruub1e.jpg";  
-
-  const kantor9 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140167/EKSTERIOR_SDA_V11__qvu6wc.jpg";  
-
-  const kantor10 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140167/EKSTERIOR_SDA_V15__ydlirm.jpg";  
-
-  const kantor11 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774140172/EKSTERIOR_SDA_V28_yzx92r.jpg";  
-
-  
-    
-  const masjid1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021198/masjid_unjani_v1_lawl1d.jpg";  
-    
-  const masjid2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021591/masjid2_pqu7eg.jpg";  
-
-  const masjid3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021606/masjid_o9dv9l.jpg";  
-
-  const masjid4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021503/masjid_unjani_v11_tq8jo4.jpg";  
-
-  const masjid5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021497/masjid_unjani_v22_xozfbp.jpg";  
-    
-  const masjid6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021495/masjid_unjani_v2_cdz8o7.jpg";  
-    
-  const masjid7 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021753/masjid_unjani_v20_zhdjue.jpg";  
-    
-  const masjid8 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774021859/masjid_unjani_v7_avkhbq.jpg";  
-        
-  
-
-  const kost1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png";
-    
-  const kost2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost2_qwvj3f.png";
-
-  
-  const kost3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537419/kost3_c4uvqu.png";  
-
-  const rumahsakit1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537967/rumahsakit1_u2gqpt.png";  
-
-  const rumahsakit2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537967/rumahsakit2_khiyw3.png";  
-    
-  const rumahsakit3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537967/rumahsakit3_kpdgzz.png";    
-
-  const klinik1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773538892/klinik1_x79t7w.png";    
-    
-  const klinik2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773538892/klinik2_omu7dz.png";    
-    
-  const klinik3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773538892/klinik3_s1ksiz.png";      
-  
-  const klinik4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773539255/klinik4_onuufc.png";      
-  
-  const klinik5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773539244/klinik5_xswdux.png";      
-  
-  const klinik6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773539244/klinik6_jwaekg.png";      
-    
-  const rumahtinggal1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540467/rumahtinggal_psiqom.png";      
-    
-  const rumahtinggal2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540465/rumahtinggal2_qtphs0.png";      
-    
-  const rumahtinggal3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540468/rumahtinggal3_ryrdu5.png";      
-    
-  const rumahtinggal4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540468/rumahtinggal4_yxdr44.png";      
-    
-  const rumahtinggal5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540465/rumahtinggal5_bsf0tb.png";      
-    
-  const rumahtinggal6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540464/rumahtinggal6_mgzbdp.png";      
-    
-  const rumahtinggal7 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773540464/rumahtinggal7_zjkh7z.png";      
-    
-  const interior1 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541946/interior1_z1nowv.png";      
-  
-  const interior2 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541941/interior2_ug8ilx.png";      
-  
-  const interior3 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541937/interior3_dlrdwk.png";      
-  
-  const interior4 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541938/interior4_cnprw6.png";      
-  
-  const interior5 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541934/interior5_pjych4.png";      
-  
-  const interior6 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541937/interior6_jdcume.png";      
-  
-  const interior7 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541935/interior7_nr4sht.png";      
-  
-  const interior8 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541931/interior8_twiu5z.png";      
-  
-  const interior9 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541934/interior9_dilvrl.png";      
-  
-  const interior10 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541933/interior10_hckx76.png";      
-  
-  const interior11 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541935/interior11_jbligz.png";      
-  
-  const interior12 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541929/interior12_gs78tb.png";      
-  
-  const interior13 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541925/interior13_g3t8oj.png";      
-  
-  const interior14 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541922/interior14_iaetwp.png";      
-  
-  const interior15 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541919/interior15_pzfrje.png";      
-  
-  const interior16 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541921/interior16_snzcfv.png";      
-  
-  const interior17 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541917/interior17_vkz6ov.png";      
-  
-  const interior18 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541923/interior18_owl5lw.png";      
-  
-  const interior19 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541919/interior19_hb8slf.png";      
-  
-  const interior20 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541917/interior20_tpkp6j.png";      
-  
-  const interior21 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541915/interior21_aimemq.png";      
-  
-  const interior22 =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773541914/interior22_rl8ajx.png";      
-    
-    
+  /* ===== curated (ONLY REPRESENTATIVE) ===== */
   const projects: Project[] = [
     {
       title: "Bangunan Masjid",
       desc: "Perancangan masjid modern dan kawasan ibadah terpadu.",
-      images: [masjid1, masjid2, masjid3, masjid4, masjid5, masjid6, masjid7, masjid8],
+      image:
+        "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774569316/desain_masjid_kampus_modern_11_sjl7zd.jpg",
     },
     {
-      title: "Bangun Pendidikan",
-      desc: "Desain fasilitas pendidikan yang fungsional dan adaptif.",
-      images: [sekolah3,sekolah1, sekolah2, sekolah4, sekolah5, sekolah6, sekolah7, sekolah8,
-        sekolah9, sekolah10
-      ],
+      title: "Fasilitas Pendidikan",
+      desc: "Desain ruang belajar yang adaptif dan berkelanjutan.",
+      image:
+        "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774567948/desain_gedung_kampus_modern_2_tkgnnj.jpg",
     },
     {
-      title: "Bangunan Rumah Sakit",
-      desc: "Perencanaan bangunan kesehatan sesuai standar medis.",
-      images: [rumahsakit1, rumahsakit2, rumahsakit3],
+      title: "Bangunan Kesehatan",
+      desc: "Perencanaan rumah sakit dan klinik sesuai standar medis.",
+      image:
+        "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537967/rumahsakit2_khiyw3.png",
     },
     {
-      title: "Bangunan Rumah Kost",
-      desc: "Perencanaan bangunan Rumah Kost yang nyaman.",
-      images: [kost1, kost2, kost3],
-    },
-    {
-      title: "Bangun Perkantoran",
+      title: "Perkantoran",
       desc: "Ruang kerja profesional yang efisien dan representatif.",
-      images: [kantor1, kantor2, kantor3, kantor4,kantor5, kantor6, kantor7, kantor8,
-        kantor9, kantor10, kantor11
-      ],
+      image:
+        "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774568474/desain_kantor_teknis_pemerintah_4_kdf2fg.jpg",
     },
-    
     {
-      title: "Bangunan Klinik",
-      desc: "Perancangan bangunan Kesehatan sesuai standar medis.",
-      images: [klinik1,klinik2,klinik3, klinik4, klinik5, klinik6],
-    },
-    
-    {
-      title: "Rumah Tinggal",
-      desc: "Perancangan hunian modern dengan pendekatan fungsional.",
-      images: [rumahtinggal1, rumahtinggal2, rumahtinggal3, rumahtinggal4, rumahtinggal5, rumahtinggal6, rumahtinggal7],
+      title: "Hunian",
+      desc: "Desain rumah tinggal modern dengan pendekatan fungsional.",
+      image:
+        "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774531913/rumah_hunian_mbeuzg.jpg",
     },
     {
       title: "Interior",
-      desc: "Penataan ruang interior dengan estetika dan efisiensi.",
-      images: [interior1, interior2, interior3, interior4, interior5, interior6,
-        interior7, interior8, interior9, interior10, interior11, interior12, interior13,
-        interior14, interior15, interior16, interior17, interior18, interior19, interior20,
-        interior21, interior22
-      ],
+      desc: "Penataan interior dengan estetika dan efisiensi ruang.",
+      image:
+        "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774534197/desain_interior_bank_modern1_rvehm3.jpg",
     },
   ];
-  /* ===== lightbox ===== */
-
-  const [lightbox, setLightbox] = useState<{
-    images: string[];
-    index: number;
-  } | null>(null);
-
-  const startX = useRef<number | null>(null);
-
-  const next = () => {
-    if (!lightbox) return;
-
-    setLightbox({
-      ...lightbox,
-      index: (lightbox.index + 1) % lightbox.images.length,
-    });
-  };
-
-  const prev = () => {
-    if (!lightbox) return;
-
-    setLightbox({
-      ...lightbox,
-      index:
-        lightbox.index === 0
-          ? lightbox.images.length - 1
-          : lightbox.index - 1,
-    });
-  };
-
-  const touchStart = (e: React.TouchEvent) => {
-    startX.current = e.touches[0].clientX;
-  };
-
-  const touchEnd = (e: React.TouchEvent) => {
-    if (startX.current === null) return;
-
-    const diff = e.changedTouches[0].clientX - startX.current;
-
-    if (diff > 50) prev();
-    if (diff < -50) next();
-
-    startX.current = null;
-  };
 
   return (
     <section id="arsitektur" className="section-tight bg-[rgb(var(--color-bg))]">
       <div className="container-main">
 
-        {/* heading */}
-        <div className="mb-6">
-          <h2 className="h2 text-[rgb(var(--color-primary))] mb-2">
-            Layanan Arsitektur
+        {/* ================= HEADER ================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 max-w-[640px]"
+        >
+          <p className="caption-label text-[rgb(var(--color-primary))] mb-2">
+            Architecture Services
+          </p>
+
+          <h2 className="h2 text-[rgb(var(--color-text))] mb-3">
+            Layanan Arsitektur Profesional
           </h2>
 
-          <p className="text-[12px] text-[rgb(var(--color-muted))] max-w-[520px]">
-            Perencanaan arsitektur profesional untuk berbagai jenis bangunan
-            dengan pendekatan fungsi, estetika, dan keberlanjutan.
+          <p className="caption">
+            Perencanaan arsitektur untuk berbagai kebutuhan bangunan dengan
+            pendekatan fungsi, estetika, dan keberlanjutan. Eksplorasi
+            portofolio kami untuk melihat implementasi nyata di berbagai proyek.
           </p>
-        </div>
+        </motion.div>
 
-        {/* hero */}
-        <div
+        {/* ================= HERO ================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="
-          relative
-          w-full
-          h-[220px]
-          md:h-[320px]
-          rounded-[var(--radius-lg)]
-          overflow-hidden
-          border border-[rgb(var(--color-border))]
-          shadow-[var(--shadow-soft)]
-          mb-8
+            relative
+            w-full
+            h-[200px]
+            md:h-[300px]
+            rounded-[var(--radius-lg)]
+            overflow-hidden
+            border border-[rgb(var(--color-border))]
+            shadow-[var(--shadow-soft)]
+            mb-10
           "
         >
           <Image
             src={cloudinaryImage(heroImage, "banner")}
             alt="Proyek arsitektur"
             fill
+            priority
             sizes="100vw"
             className="object-cover"
           />
 
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
+          <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/20" />
+        </motion.div>
 
-        {/* grid */}
-        <div className="grid grid-cols-2 gap-4">
-          {projects.map((project, i) => (
-            <ArchitectureCard
-              key={i}
-              project={project}
-              onOpenLightbox={(images, index) =>
-                setLightbox({ images, index })
-              }
-            />
-          ))}
-        </div>
-      </div>
+        {/* ================= GRID ================= */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
-      {/* LIGHTBOX */}
-      {lightbox && (
-        <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={() => setLightbox(null)}
-        >
-          <div
-            className="relative w-[92vw] h-[85vh]"
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={touchStart}
-            onTouchEnd={touchEnd}
-          >
-            <Image
-              src={cloudinaryImage(
-                lightbox.images[lightbox.index],
-                "banner"
-              )}
-              alt="preview"
-              fill
-              className="object-contain"
-            />
-
-            {/* close button */}
-            <button
-              onClick={() => setLightbox(null)}
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
               className="
-              absolute
-              top-4
-              right-4
-              w-9
-              h-9
-              rounded-full
-              bg-black/60
-              text-white
-              text-[18px]
-              flex
-              items-center
-              justify-center
-              backdrop-blur
-            "
+                group
+                card-premium
+                p-0
+                overflow-hidden
+              "
             >
-              ✕
-            </button>
 
-            {/* arrows */}
-            {lightbox.images.length > 1 && (
-              <>
-                <button
-                  onClick={prev}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-3xl"
-                >
-                  ‹
-                </button>
+              {/* image */}
+              <div className="relative h-[140px] overflow-hidden">
+                <Image
+                  src={cloudinaryImage(project.image, "preview")}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width:768px) 50vw, 33vw"
+                  className="
+                    object-cover
+                    transition-transform
+                    duration-500
+                    group-hover:scale-[1.05]
+                  "
+                />
+              </div>
 
-                <button
-                  onClick={next}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-3xl"
-                >
-                  ›
-                </button>
-              </>
-            )}
-          </div>
+              {/* content */}
+              <div className="p-4">
+
+                <h3 className="text-[13px] font-semibold text-[rgb(var(--color-text))] mb-1">
+                  {project.title}
+                </h3>
+
+                <p className="text-[11.5px] leading-[1.55] text-[rgb(var(--color-muted))]">
+                  {project.desc}
+                </p>
+
+              </div>
+
+            </motion.div>
+          ))}
+
         </div>
-      )}
+
+        {/* ================= CTA ================= */}
+        <div className="mt-10 flex justify-start">
+          <Link href="/portfolio" className="btn btn-primary">
+            Lihat Portfolio Lengkap
+          </Link>
+        </div>
+
+      </div>
     </section>
   );
 }

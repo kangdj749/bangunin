@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-
+import Link from "next/link";
 export default function Section7CTA() {
   return (
     <section className="section-tight bg-[rgb(var(--color-bg))]">
@@ -47,19 +47,19 @@ export default function Section7CTA() {
             {/* Buttons */}
             <div className="flex flex-wrap items-center gap-3">
 
-              <a
+              <Link
                 href="/kontak"
-                className="btn-primary"
+                className="btn btn-primary"
               >
                 Konsultasi Proyek
-              </a>
+              </Link>
 
-              <a
+              <Link
                 href="/portfolio"
-                className="btn-outline"
+                className="btn btn-outline"
               >
                 Lihat Portofolio
-              </a>
+              </Link>
 
             </div>
 
@@ -69,7 +69,7 @@ export default function Section7CTA() {
               text-[11px]
               text-[rgb(var(--color-muted))]
             ">
-              Respons biasanya dalam 1–2 hari kerja
+              Tim kami akan segera menindaklanjuti kebutuhan Anda secara profesional.
             </div>
 
           </div>

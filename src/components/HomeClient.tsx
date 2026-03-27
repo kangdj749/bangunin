@@ -3,11 +3,7 @@
 
 import HybridWhatsAppCTA from "@/components/HybridWhatsAppCTA";
 import TrustStrip from "@/components/TrustStripSection";
-import FinalCTASection from "@/components/FinalCTASection";
-import SectionWrapper from "@/components/SectionWrapper";
 import VisualServicesPreview from "@/components/VisualServicesPreview";
-import PortfolioPreview from "@/components/PortfolioPreview";
-import EcoTourismSection from "./EcoTourismSection";
 import HeroPremium from "./layout/HeroPremium";
 
 /* ================================

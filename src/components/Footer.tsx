@@ -60,10 +60,10 @@ export default function Footer() {
               leading-[1.6]
             ">
               {[
-                { label: "Penataan Ruang", href: "/penataanruang" },
-                { label: "Arsitektur", href: "/layanan#arsitektur" },
-                { label: "Rekayasa Teknik", href: "/layanan#rekayasa" },
-                { label: "Topografi & Geoteknik", href: "/layanan#topografi" },
+                { label: "Penataan Ruang", href: "/layanan/penataan-ruang" },
+                { label: "Arsitektur", href: "/layanan/arsitektur" },
+                { label: "Rekayasa Teknik", href: "/layanan/rekayasa-teknik" },
+                { label: "Topografi & Geoteknik", href: "/layanan/topografi-geoteknik" },
               ].map((item, i) => (
                 <li key={i}>
                   <Link

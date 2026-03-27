@@ -1,84 +1,112 @@
 "use client";
 
 import Image from "next/image";
-import { cloudinaryImage } from "@/lib/cloudinaryImage";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
-export default function SpatialHero() {
-  const heroImage =
+export default function HeroArchitecture() {
+  const image =
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774138404/masjid_unjani_v18_qopors.jpg";
 
   return (
-    <section className="relative min-h-[500px] md:min-h-[640px] flex items-center overflow-hidden bg-[rgb(var(--color-bg))]">
+    <section className="relative overflow-hidden bg-[rgb(var(--color-dark))]">
 
-      {/* Background Image */}
-      <div className="absolute inset-0">
+      {/* ================= BACKGROUND ================= */}
+      <motion.div
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.6, ease: "easeOut" }}
+        className="absolute inset-0"
+      >
         <Image
-          src={cloudinaryImage(heroImage, "banner")}
-          alt="Architecture Engineering Construction"
+          src={cloudinaryImage(image, "banner")}
+          alt="Penataan Ruang"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover will-change-transform"
         />
-      </div>
+      </motion.div>
 
-      {/* Overlay (improved readability) */}
+      {/* Overlay */}
       <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/60" />
 
-      {/* Bottom fade */}
+      {/* Subtle gradient bottom */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[rgb(var(--color-bg))]" />
 
-      <div className="container-main relative z-10">
+      {/* ================= CONTENT ================= */}
+      <div className="relative z-10 section flex items-center">
+        <div className="container-main">
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-[560px] py-16 md:py-20"
-        >
+          <div className="max-w-[640px]">
 
-          {/* Micro Label */}
-          <p className="text-[10px] tracking-[1.8px] uppercase font-medium text-[rgb(var(--color-white))]/70 mb-3">
-            Bidang Penataan Ruang
-          </p>
-
-          {/* Headline */}
-          <h1 className="h1 text-[rgb(var(--color-white))] mb-4">
-            Penataan Ruang yang Terencana,
-            <span className="block">
-              Terukur, dan Berkelanjutan
-            </span>
-          </h1>
-
-          {/* Subheadline */}
-          <p className="body text-[rgb(var(--color-white))]/85 mb-7 max-w-[520px]">
-            Kami membantu pemerintah, pengembang, dan institusi dalam merancang tata ruang yang tidak hanya fungsional, tetapi juga menciptakan nilai jangka panjang.
-          </p>
-
-          {/* CTA */}
-          <div className="flex flex-wrap items-center gap-3">
-
-            <a
-              href="/kontak#consultation-form"
-              className="btn btn-primary-dark"
+            {/* Label */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="caption-light caption-label mb-4"
             >
-              Konsultasi
-            </a>
+              Bidang Penataan Ruang
+            </motion.p>
 
-            <button
-              className="
-                btn btn-outline-light
-                
-              "
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="h1 text-[rgb(var(--color-white))] mb-5"
             >
-              Portofolio
-            </button>
+              Penataan Ruang yang Terencana, Terukur, dan Berkelanjutan
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="body-lg text-[rgb(var(--color-white))]/85 mb-8 max-w-[560px]"
+            >
+              Kami membantu pemerintah, pengembang, dan institusi dalam merancang tata ruang yang tidak hanya fungsional, tetapi juga menciptakan nilai jangka panjang.
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <Link
+                href="/kontak"
+                className="btn btn-primary-dark hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Konsultasi Proyek
+              </Link>
+
+              <Link
+                href="/portfolio"
+                className="btn btn-outline-light hover:bg-[rgb(var(--color-white))]/10"
+              >
+                Lihat Portofolio
+              </Link>
+            </motion.div>
 
           </div>
 
-        </motion.div>
+        </div>
       </div>
+
+      {/* ================= SCROLL INDICATOR ================= */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 0.7, y: [0, 6, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[rgb(var(--color-white))]/70 text-[10px] tracking-[2px]"
+      >
+        SCROLL
+      </motion.div>
 
     </section>
   );

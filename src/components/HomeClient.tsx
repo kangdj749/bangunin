@@ -1,6 +1,6 @@
 "use client";
 
-import Hero from "@/components/Hero";
+
 import HybridWhatsAppCTA from "@/components/HybridWhatsAppCTA";
 import TrustStrip from "@/components/TrustStripSection";
 import FinalCTASection from "@/components/FinalCTASection";
@@ -68,14 +68,11 @@ export default function HomeClient() {
 
         <VisualServicesPreview />
 
-        <PortfolioPreview />
+        
+       
 
-        <EcoTourismSection />
 
-
-        <SectionWrapper withDivider={false}>
-          <FinalCTASection />
-        </SectionWrapper>
+       
 
         <HybridWhatsAppCTA />
       </main>

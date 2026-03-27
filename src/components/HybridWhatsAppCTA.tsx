@@ -56,19 +56,7 @@ Mohon informasi lebih lanjut.
             target="_blank"
             rel="noopener noreferrer"
             className="
-              inline-flex
-              items-center
-              gap-1.5
-              px-4
-              py-1.5
-              text-[10.5px]
-              font-medium
-              rounded-[var(--radius-sm)]
-              bg-[rgb(var(--color-primary))]
-              text-[rgb(var(--color-white))]
-              transition-all
-              duration-300
-              hover:bg-[rgb(var(--color-primary))]/90
+              btn btn-primary
             "
           >
             <MessageCircle className="w-3.5 h-3.5" />

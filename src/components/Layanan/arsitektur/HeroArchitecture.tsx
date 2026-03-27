@@ -7,7 +7,7 @@ import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
 export default function HeroArchitecture() {
   const image =
-    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773537420/kost1_clr806.png";
+    "https://res.cloudinary.com/de7fqcvpf/image/upload/v1773565509/legal_jz8hzg.jpg";
 
   return (
     <section className="relative overflow-hidden bg-[rgb(var(--color-dark))]">
@@ -48,7 +48,7 @@ export default function HeroArchitecture() {
               transition={{ duration: 0.5 }}
               className="caption-light caption-label mb-4"
             >
-              Tentang Perusahaan
+              Bidang Arsitektur
             </motion.p>
 
             {/* Headline */}
@@ -58,7 +58,7 @@ export default function HeroArchitecture() {
               transition={{ duration: 0.6 }}
               className="h1 text-[rgb(var(--color-white))] mb-5"
             >
-              Membangun Fondasi Keunggulan Profesional
+              Solusi Perencanaan Arsitektur yang Presisi & Berkelanjutan
             </motion.h1>
 
             {/* Description */}
@@ -68,8 +68,9 @@ export default function HeroArchitecture() {
               transition={{ duration: 0.7 }}
               className="body-lg text-[rgb(var(--color-white))]/85 mb-8 max-w-[560px]"
             >
-              Integrasi arsitektur, rekayasa teknik, dan manajemen konstruksi dalam satu sistem kerja profesional dan terstruktur.
-
+              Menghadirkan desain yang tidak hanya estetis, tetapi juga
+              terukur, fungsional, dan sesuai standar teknis untuk
+              berbagai jenis bangunan.
             </motion.p>
 
             {/* CTA */}

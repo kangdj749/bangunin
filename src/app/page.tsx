@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import HomeClient from "@/components/HomeClient";
-
+import PortfolioPreview from "@/components/PortfolioPreview";
+import EcoTourismSection from "@/components/EcoTourismSection";
+import FinalCTASection from "@/components/FinalCTASection";
 /* ================================
    SEO METADATA
 ================================ */
@@ -49,5 +51,14 @@ export const metadata: Metadata = {
 ================================ */
 
 export default function Page() {
-  return <HomeClient />;
+  return (
+    <>
+      <HomeClient />
+
+      {/* ✅ TARUH DI SINI (SERVER ZONE) */}
+      <PortfolioPreview />
+      <EcoTourismSection />
+      <FinalCTASection />
+    </>
+  );
 }

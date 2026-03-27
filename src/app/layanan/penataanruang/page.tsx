@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 
 
-import EcoHero from "@/components/Layanan/ekowisata/EcoHero";
-import { EcoProblem } from "@/components/Layanan/ekowisata/EcoProblem";
-import { EcoInsight } from "@/components/Layanan/ekowisata/EcoInsight";
-import { EcoSolution } from "@/components/Layanan/ekowisata/EcoSolution";
-import { EcoValue } from "@/components/Layanan/ekowisata/EcoValue";
-import { EcoCTA } from "@/components/Layanan/ekowisata/EcoCTA";
+import SpatialHero from "@/components/Layanan/SpatialHero";
+import { SpatialProblemSection } from "@/components/Layanan/SpatialProblemSection";
+import { SpatialAgitationSection } from "@/components/Layanan/SpatialAgitationSection";
+import { SpatialSolutionSection } from "@/components/Layanan/SpatialSolutionSection";
+import { SpatialServicesSection } from "@/components/Layanan/SpatialServicesSection";
+import { SpatialApproachSection } from "@/components/Layanan/SpatialApproachSection";
+import { SpatialTrustSection } from "@/components/Layanan/SpatialTrustSection";
+import SpatialCTASection from "@/components/Layanan/SpatialCTASection";
 
 /* ============================= */
 /* SEO METADATA */
@@ -18,14 +20,14 @@ export const metadata: Metadata = {
     "Bangun.in menyediakan layanan konsultan arsitektur, engineering, perencanaan wilayah, topografi, dan geoteknik untuk mendukung pembangunan yang terencana dan profesional.",
 
   alternates: {
-    canonical: "https://bangun-in.com/layanan",
+    canonical: "https://bangunin.com/layanan",
   },
 
   openGraph: {
     title: "Layanan Engineering Consultant | Bangun.in",
     description:
       "Layanan profesional konsultan arsitektur, engineering, geoteknik, dan topografi.",
-    url: "https://bangun-in.com/layanan",
+    url: "https://bangunin.com/layanan",
     type: "website",
   },
 
@@ -45,7 +47,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "EngineeringService",
   name: "Bangun.in Engineering Consultant",
-  url: "https://bangun-in.com/layanan",
+  url: "https://bangunin.com/layanan",
   serviceType: [
     "Architecture Design",
     "Engineering Consultant",
@@ -86,7 +88,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Beranda",
-      item: "https://bangun-in.com",
+      item: "https://bangunin.com",
     },
     {
       "@type": "ListItem",
@@ -125,14 +127,23 @@ export default function Page() {
 
       <main className="relative">
 
-      <EcoHero />
-      <EcoProblem />
-      <EcoInsight />
-      <EcoSolution />
-      <EcoValue />
-      <EcoCTA />
-        {/* SEO INTERNAL LINK */}
-     </main>
+        <SpatialHero />
+
+        <SpatialProblemSection />
+
+        <SpatialAgitationSection />
+
+        <SpatialSolutionSection />
+
+        <SpatialServicesSection />
+
+        <SpatialApproachSection />
+
+        <SpatialTrustSection />
+
+        <SpatialCTASection />
+
+      </main>
     </>
   );
 }

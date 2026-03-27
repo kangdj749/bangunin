@@ -119,7 +119,7 @@ export default function HeroPremium() {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col sm:flex-row gap-3"
               >
-                <Link href="#contact" className="btn btn-primary">
+                <Link href="#contact" className="btn btn-primary-dark">
                   Konsultasi Proyek
                 </Link>
 

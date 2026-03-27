@@ -1,55 +1,109 @@
 "use client";
 
 import Image from "next/image";
-import { cloudinaryImage } from "@/lib/cloudinaryImage";
 import { motion } from "framer-motion";
-export function EcoHero() {
+import Link from "next/link";
+import { cloudinaryImage } from "@/lib/cloudinaryImage";
 
-    const EcoHero =
+export default function EcoHero() {
+  const image =
     "https://res.cloudinary.com/de7fqcvpf/image/upload/v1774223173/ecowisata_johlc4.jpg";
 
-
   return (
-    <section className="relative min-h-[480px] md:min-h-[640px] flex items-center overflow-hidden">
+    <section className="relative overflow-hidden bg-[rgb(var(--color-dark))]">
 
-       {/* Background Image */}
-            <div className="absolute inset-0">
-              <Image
-                src={cloudinaryImage(EcoHero, "banner")}
-                alt="Architecture Engineering Construction"
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover"
-              />
-            </div>
+      {/* ================= BACKGROUND ================= */}
+      <motion.div
+        initial={{ scale: 1.05 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.6, ease: "easeOut" }}
+        className="absolute inset-0"
+      >
+        <Image
+          src={cloudinaryImage(image, "banner")}
+          alt="Eko Wisata"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover will-change-transform"
+        />
+      </motion.div>
 
+      {/* Overlay */}
       <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/60" />
 
-      <div className="container-main relative z-10">
+      {/* Subtle gradient bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-[rgb(var(--color-bg))]" />
 
-        <div className="max-w-[560px] py-16">
+      {/* ================= CONTENT ================= */}
+      <div className="relative z-10 section flex items-center">
+        <div className="container-main">
 
-          <p className="caption-light caption-label">
-            Perencanaan Ekowisata
-          </p>
+          <div className="max-w-[640px]">
 
-          <h1 className="h1 text-[rgb(var(--color-white))] mb-4">
-            Mewujudkan Kawasan Ekowisata yang Berkelanjutan dan Bernilai
-          </h1>
+            {/* Label */}
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="caption-light caption-label mb-4"
+            >
+              Perencanaan Ekowisata
+            </motion.p>
 
-          <p className="body text-[rgb(var(--color-white))]/85 mb-6">
-            Kami membantu merancang kawasan wisata berbasis alam yang tidak hanya menarik,
-            tetapi juga menjaga keseimbangan antara lingkungan, ekonomi, dan masyarakat lokal.
-          </p>
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="h1 text-[rgb(var(--color-white))] mb-5"
+            >
+              Mewujudkan Kawasan Ekowisata yang Berkelanjutan dan Bernilai
+            </motion.h1>
 
-          <a href="#kontak" className="btn btn-primary-dark">
-            Konsultasi Proyek
-          </a>
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="body-lg text-[rgb(var(--color-white))]/85 mb-8 max-w-[560px]"
+            >
+              Kami membantu merancang kawasan wisata berbasis alam yang tidak hanya menarik, tetapi juga menjaga keseimbangan antara lingkungan, ekonomi, dan masyarakat lokal.
+
+            </motion.p>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <Link
+                href="/kontak"
+                className="btn btn-primary-dark hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Konsultasi Proyek
+              </Link>
+
+              
+            </motion.div>
+
+          </div>
 
         </div>
-
       </div>
+
+      {/* ================= SCROLL INDICATOR ================= */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 0.7, y: [0, 6, 0] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[rgb(var(--color-white))]/70 text-[10px] tracking-[2px]"
+      >
+        SCROLL
+      </motion.div>
+
     </section>
   );
 }

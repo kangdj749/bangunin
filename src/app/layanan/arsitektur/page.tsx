@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 
 
-import EcoHero from "@/components/Layanan/ekowisata/EcoHero";
-import { EcoProblem } from "@/components/Layanan/ekowisata/EcoProblem";
-import { EcoInsight } from "@/components/Layanan/ekowisata/EcoInsight";
-import { EcoSolution } from "@/components/Layanan/ekowisata/EcoSolution";
-import { EcoValue } from "@/components/Layanan/ekowisata/EcoValue";
-import { EcoCTA } from "@/components/Layanan/ekowisata/EcoCTA";
+import HeroArchitecture from "@/components/Layanan/arsitektur/HeroArchitecture";
+import ProblemSection from "@/components/Layanan/arsitektur/ProblemSection";
+import AgitationSection from "@/components/Layanan/arsitektur/AgitationSection";
+import SolutionSection from "@/components/Layanan/arsitektur/SolutionSection";
+import PortfolioSection from "@/components/Layanan/arsitektur/PortfolioSection";
+import ProcessSection from "@/components/Layanan/arsitektur/ProcessSection";
+import TrustSection from "@/components/Layanan/arsitektur/TrustSection";
+import CTASection from "@/components/Layanan/arsitektur/CTASection";
+import ServicesSection from "@/components/Layanan/arsitektur/ServicesSection";
 
 /* ============================= */
 /* SEO METADATA */
@@ -125,12 +128,15 @@ export default function Page() {
 
       <main className="relative">
 
-      <EcoHero />
-      <EcoProblem />
-      <EcoInsight />
-      <EcoSolution />
-      <EcoValue />
-      <EcoCTA />
+      <HeroArchitecture />
+      <ProblemSection />
+      <AgitationSection />
+      <SolutionSection />
+      <ServicesSection />
+      <PortfolioSection />
+      <ProcessSection />
+      <TrustSection />
+      <CTASection />
         {/* SEO INTERNAL LINK */}
      </main>
     </>

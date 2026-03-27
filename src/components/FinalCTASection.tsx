@@ -57,7 +57,7 @@ export default function ClosingCTA() {
             {/* CTA */}
             <a
               href="/kontak"
-              className="btn btn-primary"
+              className="btn btn-primary-dark"
             >
               Ajukan Konsultasi
             </a>

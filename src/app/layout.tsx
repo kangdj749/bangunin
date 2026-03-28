@@ -22,31 +22,30 @@ const playfair = Playfair_Display({
 /* ============================= */
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bangun-in.com"),
+  metadataBase: new URL("https://bangunin.com"),
 
   title: {
     default: "Bangun.in — Konsultan Arsitektur & Engineering Indonesia",
-    template: "%s | Bangun.in Engineering Consultant",
+    template: "%s | Bangun.in",
   },
 
   description:
-    "PT Bangun Cipta Solusi (bangun.in) adalah konsultan arsitektur, engineering, topografi, dan geoteknik yang menyediakan solusi perencanaan dan manajemen konstruksi profesional di Indonesia.",
+    "Bangun.in adalah konsultan arsitektur, engineering, topografi, dan geoteknik yang menyediakan solusi perencanaan dan konstruksi profesional di Indonesia.",
 
   keywords: [
     "konsultan arsitektur",
-    "engineering consultant",
+    "engineering consultant indonesia",
     "konsultan teknik",
-    "perencanaan wilayah",
+    "jasa penataan ruang",
     "geoteknik",
     "topografi",
-    "konsultan konstruksi",
   ],
 
   openGraph: {
     title: "Bangun.in Engineering Consultant",
     description:
-      "Konsultan arsitektur, engineering, dan konstruksi terintegrasi untuk proyek profesional.",
-    url: "https://bangun-in.com",
+      "Konsultan arsitektur dan engineering profesional di Indonesia.",
+    url: "https://bangunin.com",
     siteName: "Bangun.in",
     locale: "id_ID",
     type: "website",
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bangun.in Engineering Consultant",
     description:
-      "Konsultan arsitektur, engineering, dan konstruksi profesional.",
+      "Konsultan arsitektur dan engineering profesional.",
   },
 
   robots: {
@@ -66,24 +65,29 @@ export const metadata: Metadata = {
 };
 
 /* ============================= */
-/* ORGANIZATION SCHEMA */
+/* GLOBAL SCHEMA */
 /* ============================= */
 
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "PT Bangun Cipta Solusi",
-  url: "https://bangun-in.com",
-  logo: "https://bangun-in.com/logo.png",
+  url: "https://bangunin.com",
+  logo: "https://bangunin.com/logo.png",
   email: "bangunciptasolusi01@gmail.com",
-  telephone: "+62-877-6550-5935",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Jl. Perjuangan No. 88",
-    addressLocality: "Jakarta Barat",
-    addressCountry: "Indonesia",
+  telephone: "+6287765505935",
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Bangun.in",
+  url: "https://bangunin.com",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://bangunin.com/blog/search?q={search_term_string}",
+    "query-input": "required name=search_term_string",
   },
-  sameAs: [],
 };
 
 export default function RootLayout({
@@ -96,13 +100,20 @@ export default function RootLayout({
       lang="id"
       className={`${inter.variable} ${playfair.variable}`}
     >
-      <body className="font-sans text-gray-900 bg-white">
+      <body className="bg-[rgb(var(--color-bg))] text-[rgb(var(--color-text))]">
 
-        {/* JSON LD GLOBAL */}
+        {/* GLOBAL JSON-LD */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(organizationSchema),
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
           }}
         />
 

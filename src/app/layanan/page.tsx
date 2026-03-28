@@ -21,27 +21,22 @@ type ServiceLink = {
 /* ============================= */
 
 export const metadata: Metadata = {
-  title: "Layanan Konsultan Arsitektur & Engineering",
+  metadataBase: new URL("https://bangunin.com"),
+
+  title: "Layanan Konsultan Arsitektur, Engineering & Geoteknik",
   description:
-    "Bangun.in menyediakan layanan konsultan arsitektur, engineering, perencanaan wilayah, topografi, dan geoteknik untuk mendukung pembangunan yang terencana dan profesional.",
+    "Layanan lengkap konsultan arsitektur, rekayasa teknik, penataan ruang, dan geoteknik untuk proyek profesional.",
 
   alternates: {
-    canonical: "https://bangun-in.com/layanan",
+    canonical: "/layanan",
   },
 
   openGraph: {
-    title: "Layanan Engineering Consultant | Bangun.in",
+    title: "Layanan Konsultan | Bangun.in",
     description:
-      "Layanan profesional konsultan arsitektur, engineering, geoteknik, dan topografi.",
-    url: "https://bangun-in.com/layanan",
+      "Layanan arsitektur, engineering, dan geoteknik profesional.",
+    url: "/layanan",
     type: "website",
-  },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Layanan Engineering Consultant | Bangun.in",
-    description:
-      "Solusi profesional untuk arsitektur, engineering, dan konstruksi.",
   },
 };
 
@@ -51,15 +46,15 @@ export const metadata: Metadata = {
 
 const serviceSchema = {
   "@context": "https://schema.org",
-  "@type": "EngineeringService",
-  name: "Bangun.in Engineering Consultant",
-  url: "https://bangun-in.com/layanan",
+  "@type": "ProfessionalService",
+  name: "Bangun.in",
+  url: "https://bangunin.com",
+  areaServed: "Indonesia",
   serviceType: [
-    "Architecture Design",
-    "Engineering Consultant",
-    "Urban Planning",
-    "Geotechnical Engineering",
-    "Topography Survey",
+    "Jasa Arsitektur",
+    "Rekayasa Teknik",
+    "Penataan Ruang",
+    "Geoteknik",
   ],
 };
 
@@ -94,7 +89,7 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Beranda",
-      item: "https://bangun-in.com",
+      item: "https://bangunin.com",
     },
     {
       "@type": "ListItem",
@@ -114,12 +109,12 @@ export default function Page() {
     },
     {
       title: "Penataan Ruang",
-      href: "/layanan/penataanruang",
+      href: "/layanan/penataan-ruang",
       desc: "Perencanaan wilayah berbasis analisis dan keberlanjutan.",
     },
     {
       title: "Rekayasa Teknik",
-      href: "/layanan/rekayasateknik",
+      href: "/layanan/rekayasa-teknik",
       desc: "Solusi engineering untuk struktur dan infrastruktur.",
     },
     {

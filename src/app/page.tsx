@@ -8,44 +8,51 @@ import FinalCTASection from "@/components/FinalCTASection";
 ================================ */
 
 export const metadata: Metadata = {
-  title:
-    "Bangun.in | Konsultan Arsitektur, Engineering & Geoteknik Profesional",
+  metadataBase: new URL("https://bangunin.com"),
+
+  title: "Bangun.in | Konsultan Arsitektur & Engineering Profesional",
   description:
-    "Bangun.in adalah konsultan arsitektur, engineering, topografi dan geoteknik profesional yang menghadirkan solusi perencanaan dan konstruksi terintegrasi di Indonesia.",
+    "Bangun.in adalah konsultan arsitektur, engineering, topografi dan geoteknik profesional di Indonesia.",
 
   keywords: [
     "konsultan arsitektur",
     "konsultan engineering",
     "jasa geoteknik",
     "konsultan topografi",
-    "perencana konstruksi",
-    "engineering consultant indonesia",
   ],
 
   alternates: {
-    canonical: "https://bangunin.com",
+    canonical: "/",
   },
 
   openGraph: {
-    title:
-      "Bangun.in | Konsultan Arsitektur, Engineering & Geoteknik Profesional",
+    title: "Bangun.in | Konsultan Arsitektur & Engineering Profesional",
     description:
-      "Solusi perencanaan arsitektur, engineering dan konstruksi profesional untuk proyek skala kecil hingga besar.",
-    url: "https://bangunin.com",
+      "Solusi perencanaan arsitektur dan engineering profesional.",
+    url: "/",
     siteName: "Bangun.in",
     locale: "id_ID",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title:
-      "Bangun.in | Konsultan Arsitektur & Engineering Profesional",
-    description:
-      "Konsultan arsitektur, engineering dan geoteknik profesional di Indonesia.",
+    title: "Bangun.in | Konsultan Arsitektur & Engineering",
+    description: "Konsultan profesional untuk proyek konstruksi.",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
   },
 };
-
 /* ================================
    PAGE
 ================================ */

@@ -31,5 +31,6 @@ export function SpatialTrustSection() {
 
       </div>
     </section>
+    
   );
 }

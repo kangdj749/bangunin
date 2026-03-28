@@ -1,16 +1,20 @@
-import { MetadataRoute } from "next";
+import { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = "https://bangunin.com"
 
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
+        disallow: [
+          "/api/",
+          "/_next/",
+        ],
       },
     ],
-
-    sitemap: "https://bangun-in.com/sitemap.xml",
-    host: "https://bangun-in.com",
-  };
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
+  }
 }

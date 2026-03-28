@@ -1,150 +1,192 @@
-import { services } from "@/data/services";
-import { notFound } from "next/navigation";
+import type { Metadata } from "next"
+import Link from "next/link"
+import {
+  generateCityMetadata,
+  generateCitySchemas,
+} from "@/lib/seo/cityPage"
+import { cities } from "@/lib/seo/cities"
+import { generateAIContent } from "@/lib/seo/contentAI"
 
-interface PageProps {
+/* ============================= */
+/* TYPES */
+/* ============================= */
+
+type PageProps = {
   params: {
-    service: string;
-    city: string;
-  };
+    service: string
+    city: string
+  }
 }
 
-export default function ServiceCityPage({ params }: PageProps) {
-  const { service, city } = params;
+/* ============================= */
+/* METADATA */
+/* ============================= */
 
-  const serviceData = services.find((s) => s.slug === service);
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const service = params.service.replace(/-/g, " ")
+  const city = params.city
 
-  if (!serviceData) {
-    return notFound();
-  }
+  return generateCityMetadata({
+    city,
+    service,
+    slug: params.service,
+    description: `Layanan ${service} profesional di ${city} untuk perencanaan dan konstruksi proyek Anda.`,
+  })
+}
 
-  const cityName = decodeURIComponent(city);
+/* ============================= */
+/* PAGE */
+/* ============================= */
+
+export default function Page({ params }: PageProps) {
+  const city = params.city
+  const cleanService = params.service.replace(/-/g, " ")
+
+  const ai = generateAIContent({
+    city,
+    service: cleanService,
+  })
+
+  const { serviceSchema, breadcrumbSchema } = generateCitySchemas({
+    city,
+    service: cleanService,
+    slug: params.service,
+    description: ai.intro,
+  })
 
   return (
-    <main
-      className="
-      mx-auto px-4 py-10
-      max-w-[var(--container-max)]
-      "
-    >
-      {/* Header */}
-      <header className="space-y-3">
-        <h1
-          className="
-          text-[18px] md:text-[20px]
-          font-semibold
-          tracking-tight
-          text-[rgb(var(--color-text))]
-          "
-        >
-          {serviceData.name} di {cityName}
-        </h1>
-
-        <p
-          className="
-          text-[13px]
-          leading-relaxed
-          text-[rgb(var(--color-muted))]
-          max-w-[620px]
-          "
-        >
-          {serviceData.description}
-        </p>
-      </header>
-
-      {/* Content */}
-      <section
-        className="
-        mt-8 space-y-4
-        text-[13px]
-        leading-relaxed
-        text-[rgb(var(--color-text))]
-        max-w-[680px]
-        "
-      >
-        <p>
-          Bangun.in menyediakan layanan{" "}
-          <strong>{serviceData.name}</strong> profesional
-          untuk wilayah <strong>{cityName}</strong> dan
-          sekitarnya.
-        </p>
-
-        <p>
-          Tim konsultan kami berpengalaman dalam
-          perencanaan bangunan, penyusunan siteplan,
-          hingga pengurusan perizinan seperti PBG
-          dan dokumen teknis pembangunan.
-        </p>
-
-        <p>
-          Jika Anda sedang merencanakan pembangunan
-          di wilayah <strong>{cityName}</strong>, tim
-          Bangun.in siap membantu mulai dari tahap
-          perencanaan hingga realisasi proyek.
-        </p>
-      </section>
-
-      {/* CTA */}
-      <section
-        className="
-        mt-10 p-5
-        rounded-[var(--radius-lg)]
-        bg-[rgb(var(--color-surface))]
-        border border-[rgb(var(--color-border))]
-        "
-      >
-        <p
-          className="
-          text-[13px]
-          text-[rgb(var(--color-text))]
-          font-medium
-          "
-        >
-          Konsultasikan proyek Anda
-        </p>
-
-        <p
-          className="
-          text-[12px]
-          text-[rgb(var(--color-muted))]
-          mt-1
-          "
-        >
-          Tim Bangun.in siap membantu perencanaan,
-          desain, hingga pengurusan perizinan.
-        </p>
-
-        <a
-          href="/kontak"
-          className="
-          inline-flex mt-3
-          text-[12px]
-          font-medium
-          text-[rgb(var(--color-primary))]
-          hover:opacity-80
-          transition
-          "
-        >
-          Hubungi Konsultan →
-        </a>
-      </section>
-
-      {/* Structured Data */}
+    <>
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            name: `${serviceData.name} ${cityName}`,
-            areaServed: cityName,
-            provider: {
-              "@type": "Organization",
-              name: "Bangun.in",
-              url: "https://bangun.in",
-            },
-          }),
+          __html: JSON.stringify(serviceSchema),
         }}
       />
-    </main>
-  );
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbSchema),
+        }}
+      />
+
+      {/* HERO */}
+      <section className="section-tight bg-[rgb(var(--color-soft))]">
+        <div className="container-main max-w-[820px]">
+
+          <p className="caption-label text-[rgb(var(--color-primary))] mb-2">
+            Layanan di {city}
+          </p>
+
+          <h1 className="h1 mb-3">
+            {cleanService} Profesional di {city}
+          </h1>
+
+          <p className="body text-[rgb(var(--color-muted))]">
+            {ai.intro}
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link href="/kontak" className="btn btn-primary">
+              Konsultasi Sekarang
+            </Link>
+
+            <Link href="/portfolio" className="btn btn-outline">
+              Lihat Portfolio
+            </Link>
+          </div>
+
+        </div>
+      </section>
+
+      {/* CONTENT */}
+      <section className="section-tight">
+        <div className="container-main grid md:grid-cols-2 gap-6">
+
+          <div className="card-premium">
+            <h2 className="h3 mb-3">Tantangan Proyek di {city}</h2>
+            <p className="text-[13px] text-[rgb(var(--color-muted))]">
+              {ai.problem}
+            </p>
+          </div>
+
+          <div className="card-premium">
+            <h2 className="h3 mb-3">Solusi {cleanService}</h2>
+            <p className="text-[13px] text-[rgb(var(--color-muted))]">
+              {ai.solution}
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-tight bg-[rgb(var(--color-soft))]">
+        <div className="container-main max-w-[720px] text-center">
+
+          <h2 className="h2 mb-3">
+            Konsultasi {cleanService} di {city}
+          </h2>
+
+          <p className="caption mb-6">
+            {ai.closing}
+          </p>
+
+          <Link href="/kontak" className="btn btn-primary">
+            Hubungi Kami
+          </Link>
+
+        </div>
+      </section>
+
+      {/* INTERNAL LINK */}
+      <section className="section-tight">
+        <div className="container-main">
+
+          <h3 className="h3 mb-4">Layanan Terkait</h3>
+
+          <div className="flex flex-wrap gap-3">
+            <Link href="/layanan/arsitektur" className="btn btn-soft">
+              Jasa Arsitektur
+            </Link>
+
+            <Link href="/layanan/rekayasa-teknik" className="btn btn-soft">
+              Rekayasa Teknik
+            </Link>
+
+            <Link href="/layanan/penataan-ruang" className="btn btn-soft">
+              Penataan Ruang
+            </Link>
+
+            <Link href="/layanan/topografi-geoteknik" className="btn btn-soft">
+              Topografi & Geoteknik
+            </Link>
+          </div>
+
+        </div>
+      </section>
+    </>
+  )
+}
+
+/* ============================= */
+/* STATIC GENERATION */
+/* ============================= */
+
+export async function generateStaticParams() {
+  const services = [
+    "arsitektur",
+    "penataan-ruang",
+    "rekayasa-teknik",
+    "topografi-geoteknik",
+  ]
+
+  return services.flatMap((service) =>
+    cities.map((city) => ({
+      service,
+      city: city.toLowerCase().replace(/\s+/g, "-"),
+    }))
+  )
 }

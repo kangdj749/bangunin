@@ -9,8 +9,8 @@ import { SpatialServicesSection } from "@/components/Layanan/SpatialServicesSect
 import { SpatialApproachSection } from "@/components/Layanan/SpatialApproachSection"
 import { SpatialTrustSection } from "@/components/Layanan/SpatialTrustSection"
 import SpatialCTASection from "@/components/Layanan/SpatialCTASection"
+import CityServiceList from "@/components/Layanan/LinkCitySection"
 
-import { cities } from "@/lib/seo/cities"
 
 /* ============================= */
 /* SEO METADATA (ADVANCED) */
@@ -180,42 +180,7 @@ export default function Page() {
         {/* CITY SEO GRID (POWER SEO) */}
         {/* ============================= */}
 
-        <section className="section-tight">
-          <div className="container-main">
-
-            <h2 className="h3 mb-4">
-              Jangkauan Layanan di Berbagai Kota
-            </h2>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-
-              {cities.map((city) => {
-                const slug = city.toLowerCase().replace(/\s+/g, "-")
-
-                return (
-                  <Link
-                    key={city}
-                    href={`/layanan/penataan-ruang/${slug}`}
-                    className="
-                      text-[12px]
-                      px-3 py-2
-                      border
-                      rounded-[var(--radius-sm)]
-                      border-[rgb(var(--color-border))]
-                      text-[rgb(var(--color-muted))]
-                      hover:text-[rgb(var(--color-primary))]
-                    "
-                  >
-                    {city}
-                  </Link>
-                )
-              })}
-
-            </div>
-
-          </div>
-        </section>
-
+         <CityServiceList service="penataan-ruang" />
         {/* ============================= */}
         {/* RELATED SERVICES */}
         {/* ============================= */}

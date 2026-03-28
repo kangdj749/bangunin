@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { cities } from "@/lib/seo/cities"
+
 
 import HeroEngineering from "@/components/Layanan/rekayasateknik/HeroEngineering"
 import ProblemSection from "@/components/Layanan/rekayasateknik/ProblemSection"
@@ -8,7 +8,7 @@ import AgitationSection from "@/components/Layanan/rekayasateknik/AgitationSecti
 import SolutionSection from "@/components/Layanan/rekayasateknik/SolutionSection"
 import ScopeSection from "@/components/Layanan/rekayasateknik/ScopeSection"
 import ServiceBlockAdvanced from "@/components/Layanan/rekayasa/ServiceBlockAdvanced"
-
+import CityServiceList from "@/components/Layanan/LinkCitySection"
 /* =================================
    SEO CONFIG
 ================================= */
@@ -248,42 +248,7 @@ export default function Page() {
 
         {/* ================= CITY SEO ================= */}
 
-        <section className="section-tight bg-[rgb(var(--color-soft))]">
-          <div className="container-main">
-
-            <h2 className="h3 mb-4">
-              Jangkauan Layanan di Berbagai Kota
-            </h2>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-
-              {cities.map((city) => {
-                const slug = city.toLowerCase().replace(/\s+/g, "-")
-
-                return (
-                  <Link
-                    key={city}
-                    href={`/layanan/${service}/${slug}`}
-                    className="
-                      text-[12px]
-                      px-3 py-2
-                      border
-                      rounded-[var(--radius-sm)]
-                      border-[rgb(var(--color-border))]
-                      text-[rgb(var(--color-muted))]
-                      hover:text-[rgb(var(--color-primary))]
-                    "
-                  >
-                    {city}
-                  </Link>
-                )
-              })}
-
-            </div>
-
-          </div>
-        </section>
-
+        <CityServiceList service="rekayasa-teknik" />
         {/* ================= INTERNAL LINK ================= */}
 
         <section className="section-tight">

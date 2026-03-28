@@ -11,6 +11,7 @@ import TrustSection from "@/components/Layanan/arsitektur/TrustSection"
 import CTASection from "@/components/Layanan/arsitektur/CTASection"
 import ServicesSection from "@/components/Layanan/arsitektur/ServicesSection"
 
+import CityServiceList from "@/components/Layanan/LinkCitySection"
 import { cities } from "@/lib/seo/cities"
 
 /* ============================= */
@@ -150,98 +151,72 @@ export default function Page() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(cityListSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <main>
+      <main className="bg-[rgb(var(--color-bg))]">
 
+        {/* HERO */}
         <HeroArchitecture />
 
-        
-
+        {/* CORE CONTENT */}
         <ProblemSection />
         <AgitationSection />
         <SolutionSection />
         <ServicesSection />
-        <PortfolioSection />
-        <ProcessSection />
-        <TrustSection />
 
         {/* ============================= */}
-        {/* SEO INTRO (WAJIB BANGET) */}
+        {/* SEO INTRO (HIGH VALUE) */}
         {/* ============================= */}
 
         <section className="section-tight">
           <div className="container-main max-w-[760px]">
 
-            <h1 className="h2 mb-3">
-              Jasa Arsitek Profesional untuk Rumah & Bangunan
+            <h1 className="h2 mb-4">
+              Jasa Arsitek Profesional untuk Rumah & Bangunan Modern
             </h1>
 
-            <p className="text-muted">
-              Kami menyediakan jasa arsitek profesional untuk berbagai kebutuhan
-              desain rumah tinggal, bangunan komersial, hingga proyek skala besar.
-              Setiap desain dirancang dengan pendekatan fungsional, estetika, dan efisiensi biaya.
+            <p className="body text-muted">
+              Kami menyediakan jasa arsitek profesional untuk berbagai kebutuhan,
+              mulai dari desain rumah tinggal, bangunan komersial,
+              hingga proyek skala besar. Setiap desain dirancang
+              dengan pendekatan yang menggabungkan estetika,
+              fungsi ruang, serta efisiensi biaya konstruksi.
             </p>
 
-            <p className="text-muted mt-3">
-              Dengan pengalaman di berbagai proyek di Indonesia,
-              kami membantu klien menciptakan bangunan yang tidak hanya indah,
-              tetapi juga nyaman, efisien, dan siap digunakan dalam jangka panjang.
+            <p className="body text-muted mt-3">
+              Dengan pengalaman menangani proyek di berbagai kota di Indonesia,
+              kami memastikan setiap rancangan tidak hanya menarik secara visual,
+              tetapi juga nyaman digunakan, efisien, dan siap berkembang
+              dalam jangka panjang.
             </p>
 
           </div>
         </section>
 
         {/* ============================= */}
-        {/* CITY SEO GRID (MONEY SECTION) */}
+        {/* CITY LIST (SEO + UX BALANCED) */}
         {/* ============================= */}
 
-        <section className="section-tight">
-          <div className="container-main">
+        <CityServiceList service="arsitektur" />
 
-            <h2 className="h3 mb-4">
-              Jasa Arsitek di Berbagai Kota
-            </h2>
+        {/* ============================= */}
+        {/* PORTFOLIO & TRUST */}
+        {/* ============================= */}
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-
-              {cities.map((city) => {
-                const slug = city.toLowerCase().replace(/\s+/g, "-")
-
-                return (
-                  <Link
-                    key={city}
-                    href={`/layanan/arsitektur/${slug}`}
-                    className="
-                      text-[12px]
-                      px-3 py-2
-                      border
-                      rounded-[var(--radius-sm)]
-                      border-[rgb(var(--color-border))]
-                      text-[rgb(var(--color-muted))]
-                      hover:text-[rgb(var(--color-primary))]
-                    "
-                  >
-                    {city}
-                  </Link>
-                )
-              })}
-
-            </div>
-
-          </div>
-        </section>
+        <PortfolioSection />
+        <ProcessSection />
+        <TrustSection />
 
         {/* ============================= */}
         {/* RELATED SERVICES */}
         {/* ============================= */}
 
-        <section className="section-tight">
+        <section className="section-tight bg-[rgb(var(--color-soft))]">
           <div className="container-main">
 
             <h3 className="h3 mb-4">
               Layanan Terkait
             </h3>
 
-            <div className="flex flex-wrap gap-3 text-[13px]">
+            <div className="flex flex-wrap gap-3">
 
               <Link href="/layanan/penataan-ruang" className="btn btn-outline">
                 Penataan Ruang
@@ -260,6 +235,7 @@ export default function Page() {
           </div>
         </section>
 
+        {/* CTA */}
         <CTASection />
 
       </main>

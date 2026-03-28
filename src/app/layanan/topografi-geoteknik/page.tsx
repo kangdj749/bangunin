@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { cities } from "@/lib/seo/cities"
+
 
 import HeroTopografi from "@/components/Layanan/topografi/HeroTopografi"
 import ProblemTopografi from "@/components/Layanan/topografi/ProblemTopografi"
@@ -11,7 +11,7 @@ import WhyTopografi from "@/components/Layanan/topografi/WhyTopografi"
 import ImpactTopografi from "@/components/Layanan/topografi/ImpactTopografi"
 import CTATopografi from "@/components/Layanan/topografi/CTATopografi"
 import FieldGallerySection from "@/components/Layanan/topografi/FieldGallerySection"
-
+import CityServiceList from "@/components/Layanan/LinkCitySection"
 /* =================================
    SEO CONFIG
 ================================= */
@@ -224,41 +224,7 @@ export default function TopografiPage() {
 
         {/* ================= CITY SEO ================= */}
 
-        <section className="section-tight bg-[rgb(var(--color-soft))]">
-          <div className="container-main">
-
-            <h2 className="h3 mb-4">
-              Jangkauan Layanan di Berbagai Kota
-            </h2>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-
-              {cities.map((city) => {
-                const slug = city.toLowerCase().replace(/\s+/g, "-")
-
-                return (
-                  <Link
-                    key={city}
-                    href={`/layanan/${service}/${slug}`}
-                    className="
-                      text-[12px]
-                      px-3 py-2
-                      border
-                      rounded-[var(--radius-sm)]
-                      border-[rgb(var(--color-border))]
-                      text-[rgb(var(--color-muted))]
-                      hover:text-[rgb(var(--color-primary))]
-                    "
-                  >
-                    {city}
-                  </Link>
-                )
-              })}
-
-            </div>
-
-          </div>
-        </section>
+        <CityServiceList service="topografi-geoteknik" />
 
         {/* ================= INTERNAL LINK ================= */}
 

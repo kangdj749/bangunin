@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function CTASection() {
   return (
@@ -44,13 +45,13 @@ export default function CTASection() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row sm:justify-center gap-3">
 
-            <a href="#contact" className="btn btn-primary">
+            <Link href="/kontak" className="btn btn-primary">
               Jadwalkan Diskusi
-            </a>
+            </Link>
 
-            <a href="#portfolio" className="btn btn-outline">
+            <Link href="/portfolio" className="btn btn-outline">
               Lihat Portofolio
-            </a>
+            </Link>
 
           </div>
 

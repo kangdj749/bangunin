@@ -66,7 +66,12 @@ export default function HeroArchitecture() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7 }}
-              className="body-lg text-[rgb(var(--color-white))]/85 mb-8 max-w-[560px]"
+              className="
+              body-lg 
+              text-[rgb(var(--color-white))]
+              opacity-90
+              mb-8 
+              max-w-[560px]"
             >
               Menghadirkan desain yang tidak hanya estetis, tetapi juga
               terukur, fungsional, dan sesuai standar teknis untuk

@@ -92,7 +92,7 @@ export default async function PortfolioDetailPage({
                 {project.category}
               </p>
 
-              <h1 className="text-[32px] md:text-[42px] font-semibold text-white leading-tight mb-4">
+              <h1 className="text-[32px] md:text-[42px] font-semibold text-[rgb(var(--color-white))] leading-tight mb-4">
                 {project.title}
               </h1>
 

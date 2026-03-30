@@ -1,8 +1,11 @@
+
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+
 import { cloudinaryImage } from "@/lib/cloudinaryImage"
 import { getPortfolios } from "@/lib/portfolio"
+import Gallery from "./Gallery" // ⬅️ import client component
 
 /* ==============================
    STATIC PARAMS
@@ -16,25 +19,13 @@ export async function generateStaticParams() {
 }
 
 /* ==============================
-   SERVICE LINKS (SEO + UX)
+   SERVICES
 ============================== */
 const services = [
-  {
-    name: "Penataan Ruang",
-    href: "/layanan/penataan-ruang",
-  },
-  {
-    name: "Arsitektur",
-    href: "/layanan/arsitektur",
-  },
-  {
-    name: "Rekayasa Teknik",
-    href: "/layanan/rekayasa-teknik",
-  },
-  {
-    name: "Topografi & Geoteknik",
-    href: "/layanan/topografi-geoteknik",
-  },
+  { name: "Penataan Ruang", href: "/layanan/penataan-ruang" },
+  { name: "Arsitektur", href: "/layanan/arsitektur" },
+  { name: "Rekayasa Teknik", href: "/layanan/rekayasa-teknik" },
+  { name: "Topografi & Geoteknik", href: "/layanan/topografi-geoteknik" },
 ]
 
 /* ==============================
@@ -61,12 +52,12 @@ export default async function PortfolioDetailPage({
         .slice(0, 3)
 
   return (
-    <main className="bg-[rgb(var(--color-bg))]">
+    <main>
 
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden">
 
-        <div className="relative h-[360px] md:h-[420px] lg:h-[460px]">
+        <div className="relative h-[340px] md:h-[420px]">
           <Image
             src={cloudinaryImage(project.cover_image, "banner")}
             alt={project.title}
@@ -75,15 +66,14 @@ export default async function PortfolioDetailPage({
             className="object-cover"
           />
 
-          <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/25" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/80" />
+          <div className="absolute inset-0 bg-[rgb(var(--color-dark))]/40" />
         </div>
 
-        <div className="absolute inset-0 flex items-center z-10">
+        <div className="absolute inset-0 flex items-center">
           <div className="container-main">
-            <div className="max-w-[760px]">
+            <div className="max-w-[720px] text-[rgb(var(--color-white))]">
 
-              <p className="caption-light mb-4">
+              <p className="caption-light mb-3">
                 <Link href="/">Home</Link> /{" "}
                 <Link href="/portfolio">Portfolio</Link>
               </p>
@@ -92,7 +82,7 @@ export default async function PortfolioDetailPage({
                 {project.category}
               </p>
 
-              <h1 className="text-[32px] md:text-[42px] font-semibold text-[rgb(var(--color-white))] leading-tight mb-4">
+              <h1 className="h1 mb-3">
                 {project.title}
               </h1>
 
@@ -113,63 +103,49 @@ export default async function PortfolioDetailPage({
           {/* LEFT */}
           <div className="md:col-span-2 space-y-10">
 
+            {/* DESCRIPTION */}
             <div>
-              <h2 className="h2 mb-4">Deskripsi Proyek</h2>
-              <p className="body text-muted">{project.description}</p>
+              <h2 className="h2 mb-3">Deskripsi Proyek</h2>
+              <p className="body text-muted leading-relaxed">
+                {project.description}
+              </p>
             </div>
 
-            {project.challenge && (
-              <div>
-                <h2 className="h2 mb-4">Tantangan</h2>
-                <p className="body text-muted">{project.challenge}</p>
-              </div>
-            )}
+            {/* GRID INFO (BIAR RINGKAS) */}
+            <div className="grid sm:grid-cols-2 gap-6">
 
-            {project.solution && (
-              <div>
-                <h2 className="h2 mb-4">Solusi</h2>
-                <p className="body text-muted">{project.solution}</p>
-              </div>
-            )}
+              {project.challenge && (
+                <div className="card-premium">
+                  <h3 className="h3 mb-2">Tantangan</h3>
+                  <p className="text-muted text-[13px] leading-relaxed">
+                    {project.challenge}
+                  </p>
+                </div>
+              )}
+
+              {project.solution && (
+                <div className="card-premium">
+                  <h3 className="h3 mb-2">Solusi</h3>
+                  <p className="text-muted text-[13px] leading-relaxed">
+                    {project.solution}
+                  </p>
+                </div>
+              )}
+
+            </div>
 
             {project.result && (
-              <div>
-                <h2 className="h2 mb-4">Hasil</h2>
-                <p className="body text-muted">{project.result}</p>
+              <div className="card-premium">
+                <h3 className="h3 mb-2">Hasil</h3>
+                <p className="text-muted text-[13px] leading-relaxed">
+                  {project.result}
+                </p>
               </div>
             )}
 
             {/* ================= GALLERY ================= */}
             {project.gallery_images.length > 0 && (
-              <div>
-                <h2 className="h2 mb-4">Dokumentasi Proyek</h2>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-
-                  {project.gallery_images.map((img, i) => (
-                    <div
-                      key={i}
-                      className="
-                        relative h-56
-                        rounded-[var(--radius-lg)]
-                        overflow-hidden
-                        group
-                        border border-[rgb(var(--color-border))]
-                      "
-                    >
-                      <Image
-                        src={cloudinaryImage(img, "gallery")}
-                        alt={`Gallery ${i}`}
-                        fill
-                        className="object-cover transition duration-700 group-hover:scale-105"
-                      />
-
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
-                    </div>
-                  ))}
-
-                </div>
-              </div>
+              <Gallery images={project.gallery_images} />
             )}
 
           </div>
@@ -177,84 +153,70 @@ export default async function PortfolioDetailPage({
           {/* RIGHT */}
           <div className="space-y-6">
 
-            {/* INFO */}
             <div className="card-premium sticky top-24">
 
               <h3 className="h3 mb-4">Informasi Proyek</h3>
 
-              <div className="space-y-3 text-[13px]">
+              <div className="grid grid-cols-2 gap-y-3 text-[13px]">
 
-                <div className="flex justify-between">
-                  <span className="text-subtle">Client</span>
-                  <span>{project.client}</span>
-                </div>
+                <span className="text-subtle">Client</span>
+                <span>{project.client}</span>
 
-                <div className="flex justify-between">
-                  <span className="text-subtle">Kategori</span>
-                  <span>{project.category}</span>
-                </div>
+                <span className="text-subtle">Kategori</span>
+                <span>{project.category}</span>
 
-                <div className="flex justify-between">
-                  <span className="text-subtle">Lokasi</span>
-                  <span>{project.location}</span>
-                </div>
+                <span className="text-subtle">Lokasi</span>
+                <span>{project.location}</span>
 
-                <div className="flex justify-between">
-                  <span className="text-subtle">Tahun</span>
-                  <span>{project.year}</span>
-                </div>
+                <span className="text-subtle">Tahun</span>
+                <span>{project.year}</span>
 
               </div>
 
-              <div className="mt-6">
-                <Link href="/kontak" className="btn btn-primary w-full">
-                  Konsultasi Proyek Serupa
-                </Link>
-              </div>
+              <Link
+                href="/kontak"
+                className="btn btn-primary w-full mt-6"
+              >
+                Konsultasi Proyek
+              </Link>
 
             </div>
-
 
           </div>
 
         </div>
       </section>
 
-      {/* ================= SEO INTERNAL LINK ================= */}
+      {/* ================= INTERNAL LINK ================= */}
       <section className="section-tight">
-        <div className="container-main max-w-[720px]">
+        <div className="container-main max-w-[760px]">
 
           <h2 className="h2 mb-3">
-            Layanan Terkait Proyek Ini
+            Layanan Terintegrasi
           </h2>
 
-          <p className="body text-muted mb-4">
-            Proyek ini merupakan bagian dari layanan profesional kami
-            dalam bidang perencanaan dan konstruksi. Kami menyediakan
-            solusi terintegrasi mulai dari perencanaan ruang,
-            arsitektur, rekayasa teknik hingga investigasi tanah.
+          <p className="text-muted mb-5">
+            Proyek ini merupakan bagian dari sistem kerja terintegrasi
+            yang mencakup arsitektur, rekayasa teknik, dan manajemen
+            konstruksi untuk menghasilkan solusi yang presisi dan efisien.
           </p>
 
           <div className="flex flex-wrap gap-3">
-
             {services.map((s) => (
               <Link key={s.href} href={s.href} className="btn btn-outline">
                 {s.name}
               </Link>
             ))}
-
           </div>
 
         </div>
-      </section>      
+      </section>
 
       {/* ================= RELATED ================= */}
       <section className="section-tight bg-soft">
         <div className="container-main">
 
-          <h2 className="h2 mb-6">
-            Proyek Terkait
-          </h2>
+          <h2 className="h2 mb-6">Proyek Terkait</h2>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
 
@@ -262,15 +224,14 @@ export default async function PortfolioDetailPage({
               <Link
                 key={item.slug}
                 href={`/portfolio/${item.slug}`}
-                className="group block rounded-[var(--radius-lg)] overflow-hidden border border-[rgb(var(--color-border))]"
+                className="group block border rounded-[var(--radius-lg)] overflow-hidden"
               >
-
                 <div className="relative h-40">
                   <Image
                     src={cloudinaryImage(item.cover_image, "card")}
                     alt={item.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition"
+                    className="object-cover transition group-hover:scale-105"
                   />
                 </div>
 
@@ -279,11 +240,10 @@ export default async function PortfolioDetailPage({
                     {item.category}
                   </p>
 
-                  <h3 className="text-[13px] font-semibold">
+                  <h3 className="text-[13px] font-semibold leading-snug">
                     {item.title}
                   </h3>
                 </div>
-
               </Link>
             ))}
 
@@ -292,8 +252,7 @@ export default async function PortfolioDetailPage({
         </div>
       </section>
 
-      
-
     </main>
   )
 }
+

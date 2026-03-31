@@ -4,8 +4,8 @@ import BlogCard from "@/components/blog/BlogCard"
 import type { BlogPost } from "@/types/blog"
 
 interface CategoryPageProps {
-  params: {
-    category: string
+  readonly params: {
+    readonly category: string
   }
 }
 
@@ -14,21 +14,19 @@ interface CategoryPageProps {
 -------------------------------- */
 
 export async function generateStaticParams() {
-
   const posts: BlogPost[] = await getBlogPosts()
 
-  const categories = [
-    ...new Set(
+  const categories: string[] = Array.from(
+    new Set(
       posts
-        .map((post) => post.category)
-        .filter(Boolean)
+        .map((post) => post.category?.trim())
+        .filter((c): c is string => Boolean(c))
     )
-  ]
+  )
 
   return categories.map((category) => ({
     category: category
       .toLowerCase()
-      .trim()
       .replace(/\s+/g, "-")
   }))
 }
@@ -49,76 +47,56 @@ export default async function CategoryPage({
     getPostsByCategory(posts, categorySlug)
 
   const categoryTitle =
-  categorySlug
-    .replace(/-/g, " ")
-    .replace(/\b\w/g, (l) => l.toUpperCase())
+    categorySlug
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (l) => l.toUpperCase())
+
   return (
+    <main className="container-main section-tight">
 
-    <main
-      className="
-      mx-auto
-      max-w-[var(--container-max)]
-      px-4
-      py-8
-      "
-    >
+      {/* ================= HEADER ================= */}
 
-      {/* Header */}
+      <header className="mb-10 max-w-[680px] space-y-3">
 
-      <header
-        className="
-        mb-6
-        space-y-1
-        "
-      >
+        <div className="caption-label text-primary">
+          Kategori Artikel
+        </div>
 
-        <h1
-          className="
-          text-[16px]
-          font-semibold
-          tracking-tight
-          capitalize
-          text-[rgb(var(--color-text))]
-          "
-        >
-          Artikel {categoryTitle}
+        <h1 className="h2">
+          {categoryTitle}
         </h1>
 
-        <p
-          className="
-          text-[12px]
-          text-[rgb(var(--color-muted))]
-          "
-        >
-          Kumpulan artikel terkait {categoryTitle}
+        <p className="body text-[rgb(var(--color-muted))]">
+          Kumpulan artikel seputar{" "}
+          <span className="text-[rgb(var(--color-text))] font-medium">
+            {categoryTitle}
+          </span>{" "}
+          dalam konteks penataan ruang, integrasi arsitektur,
+          rekayasa teknik, topografi, geoteknik, serta manajemen konstruksi
+          yang terstruktur dan profesional.
         </p>
 
       </header>
 
-
-      {/* Content */}
+      {/* ================= CONTENT ================= */}
 
       {categoryPosts.length === 0 ? (
 
         <div
           className="
+          max-w-[520px]
           border
-          rounded-[var(--radius-lg)]
           border-[rgb(var(--color-border))]
+          rounded-[var(--radius-lg)]
           bg-[rgb(var(--color-surface))]
           p-6
-          text-center
           shadow-[var(--shadow-soft)]
           "
         >
 
-          <p
-            className="
-            text-[12px]
-            text-[rgb(var(--color-muted))]
-            "
-          >
-            Belum ada artikel pada kategori ini.
+          <p className="body text-[rgb(var(--color-muted))]">
+            Belum ada artikel pada kategori ini. Silakan cek kategori lain
+            atau kembali ke halaman blog utama.
           </p>
 
         </div>
@@ -129,19 +107,16 @@ export default async function CategoryPage({
           className="
           grid
           grid-cols-1
-          gap-4
           sm:grid-cols-2
-          lg:grid-cols-3
+          gap-5
           "
         >
 
           {categoryPosts.map((post) => (
-
             <BlogCard
               key={post.slug}
               post={post}
             />
-
           ))}
 
         </section>
@@ -149,6 +124,5 @@ export default async function CategoryPage({
       )}
 
     </main>
-
   )
 }

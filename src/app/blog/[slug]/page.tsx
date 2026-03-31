@@ -7,13 +7,8 @@ import { getBlogPosts } from "@/lib/googleSheetsBlog"
 import { generateTOC } from "@/lib/toc"
 import { getRelatedPosts } from "@/lib/relatedPosts"
 
-import {
-  injectInternalLinks
-} from "@/lib/blog/internalLinking"
-
-import {
-  getPopularArticles
-} from "@/lib/blog/popularArticles"
+import { injectInternalLinks } from "@/lib/blog/internalLinking"
+import { getPopularArticles } from "@/lib/blog/popularArticles"
 
 import {
   generateBreadcrumbs,
@@ -36,30 +31,22 @@ interface PageProps {
   }
 }
 
-/* ==================================
-   FAQ TYPE
-================================== */
-
 interface FAQItem {
   q: string
   a: string
 }
 
-/* ==================================
-   SEO METADATA
-================================== */
+/* ================= SEO ================= */
 
 export async function generateMetadata(
   { params }: PageProps
 ): Promise<Metadata> {
 
-  const posts =
-    await getBlogPosts() as BlogPost[]
+  const posts = await getBlogPosts() as BlogPost[]
 
-  const post =
-    posts.find(
-      (p) => p.slug === params.slug
-    )
+  const post = posts.find(
+    (p) => p.slug === params.slug
+  )
 
   if (!post) return {}
 
@@ -69,90 +56,43 @@ export async function generateMetadata(
       post.meta_description ??
       post.excerpt
   }
-
 }
 
-/* ==================================
-   PAGE
-================================== */
+/* ================= PAGE ================= */
 
 export default async function BlogDetailPage(
   { params }: PageProps
 ) {
 
-  const posts =
-    await getBlogPosts() as BlogPost[]
+  const posts = await getBlogPosts() as BlogPost[]
 
-  const post =
-    posts.find(
-      (p) => p.slug === params.slug
-    )
+  const post = posts.find(
+    (p) => p.slug === params.slug
+  )
 
   if (!post) notFound()
 
-  /* ==================================
-     FORMAT CONTENT
-  ================================== */
+  /* ===== CONTENT ===== */
 
   const formatted =
-    formatBlogContent(
-      post.content ?? ""
-    )
-
-  /* ==================================
-     INTERNAL LINKING
-  ================================== */
-
-  
+    formatBlogContent(post.content ?? "")
 
   const contentLinked =
-    injectInternalLinks(
-      formatted,
-      post, posts
-    )
-
-  /* ==================================
-     TOC
-  ================================== */
+    injectInternalLinks(formatted, post, posts)
 
   const { toc, content } =
     generateTOC(contentLinked)
 
-  /* ==================================
-     RELATED POSTS
-  ================================== */
-
   const related =
-    getRelatedPosts(
-      posts,
-      post
-    )
-
-  /* ==================================
-     POPULAR ARTICLES
-  ================================== */
+    getRelatedPosts(posts, post)
 
   const popular =
-    getPopularArticles(
-      posts,
-      5
-    )
-
-  /* ==================================
-     FEATURE IMAGE
-  ================================== */
+    getPopularArticles(posts, 5)
 
   const featuredImage =
     post.cover_image
-      ? cloudinaryImage(
-          post.cover_image,
-          "natural"
-        )
+      ? cloudinaryImage(post.cover_image, "natural")
       : ""
-
-  /* ==================================
-     CATEGORY + TAGS
-  ================================== */
 
   const category =
     post.category?.trim()
@@ -163,43 +103,34 @@ export default async function BlogDetailPage(
       .map((t) => t.trim())
       .filter(Boolean) ?? []
 
-  /* ==================================
-     FAQ PARSER
-  ================================== */
+  /* ===== CATEGORY LIST (FIX ERROR) ===== */
+
+  const categories: string[] = Array.from(
+    new Set(
+      posts
+        .map((p) => p.category?.trim())
+        .filter((c): c is string => Boolean(c))
+    )
+  )
+
+  /* ===== FAQ ===== */
 
   let faqItems: FAQItem[] = []
 
   try {
-
     if (post.faq) {
-
-      const parsed =
-        JSON.parse(post.faq)
-
+      const parsed = JSON.parse(post.faq)
       if (Array.isArray(parsed)) {
-
         faqItems = parsed.filter(
           (item): item is FAQItem =>
             typeof item.q === "string" &&
             typeof item.a === "string"
         )
-
       }
-
     }
+  } catch {}
 
-  } catch (error) {
-
-    console.error(
-      "FAQ parse error",
-      error
-    )
-
-  }
-
-  /* ==================================
-     BREADCRUMBS
-  ================================== */
+  /* ===== SCHEMA ===== */
 
   const baseUrl =
     process.env.NEXT_PUBLIC_SITE_URL ?? ""
@@ -213,277 +144,119 @@ export default async function BlogDetailPage(
     )
 
   const breadcrumbSchema =
-    generateBreadcrumbSchema(
-      breadcrumbs
-    )
-
-  /* ==================================
-     ARTICLE SCHEMA
-  ================================== */
+    generateBreadcrumbSchema(breadcrumbs)
 
   const articleSchema = {
-
     "@context": "https://schema.org",
-
-    "@type":
-      post.schema_type ??
-      "BlogPosting",
-
+    "@type": post.schema_type ?? "BlogPosting",
     headline: post.title,
-
     description:
-      post.meta_description ??
-      post.excerpt,
-
+      post.meta_description ?? post.excerpt,
     image: featuredImage,
-
-    datePublished:
-      post.published_date,
-
+    datePublished: post.published_date,
     dateModified:
-      post.last_updated ??
-      post.published_date,
-
-    author: {
-      "@type": "Organization",
-      name:
-        post.author ??
-        "Editorial Team"
-    }
-
+      post.last_updated ?? post.published_date
   }
 
-  /* ==================================
-     FAQ SCHEMA
-  ================================== */
-
-  const faqSchema =
-    faqItems.length > 0
-      ? {
-          "@context":
-            "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity:
-            faqItems.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: f.a
-              }
-            }))
-        }
-      : null
-
-  /* ==================================
-     SIDEBAR CATEGORIES
-  ================================== */
-
-  const categories: string[] =
-    Array.from(
-      new Set(
-        posts
-          .map((p) =>
-            p.category?.trim()
-          )
-          .filter(
-            (c): c is string =>
-              Boolean(c)
-          )
-      )
-    )
-
   return (
+    <main className="container-main section-tight">
 
-    <main
-      className="
-      mx-auto
-      px-4
-      py-8
-      max-w-[var(--container-max)]
-      "
-    >
-
-      {/* JSON LD */}
-
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html:
-            JSON.stringify(
-              articleSchema
-            )
+          __html: JSON.stringify(articleSchema)
         }}
       />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html:
-            JSON.stringify(
-              breadcrumbSchema
-            )
+          __html: JSON.stringify(breadcrumbSchema)
         }}
       />
 
-      {faqSchema && (
+      {/* ================= BREADCRUMB ================= */}
 
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html:
-              JSON.stringify(
-                faqSchema
-              )
-          }}
-        />
+      <nav className="caption mb-6">
 
-      )}
+        {breadcrumbs.map((item, i) => (
+          <span key={item.url}>
+            <Link
+              href={item.url}
+              className="hover:text-[rgb(var(--color-primary))]"
+            >
+              {item.name}
+            </Link>
 
-      {/* ======================
-         BREADCRUMBS
-      ====================== */}
-
-      <nav
-        className="
-        text-[11px]
-        mb-5
-        text-[rgb(var(--color-muted))]
-        "
-      >
-
-        {breadcrumbs.map(
-          (item, i) => (
-
-            <span key={item.url}>
-
-              <Link
-                href={item.url}
-                className="
-                hover:text-[rgb(var(--color-primary))]
-                "
-              >
-                {item.name}
-              </Link>
-
-              {i <
-                breadcrumbs.length - 1 && (
-                <span className="mx-2">
-                  /
-                </span>
-              )}
-
-            </span>
-
-          )
-        )}
+            {i < breadcrumbs.length - 1 && (
+              <span className="mx-2 text-[rgb(var(--color-subtle))]">
+                /
+              </span>
+            )}
+          </span>
+        ))}
 
       </nav>
 
-      <div
-        className="
-        grid grid-cols-1
-        lg:grid-cols-[1fr_260px]
-        gap-10
-        "
-      >
+      <div className="grid lg:grid-cols-[1fr_280px] gap-10">
 
-        {/* ======================
-           ARTICLE
-        ====================== */}
+        {/* ================= ARTICLE ================= */}
 
-        <article
-          className="
-          max-w-[680px]
-          "
-        >
+        <article className="max-w-[720px]">
 
-          {category && (
+          <header className="space-y-3">
 
-            <Link
-              href={`/blog/kategori/${category.toLowerCase().replace(/\s+/g,"-")}`}
-              className="
-              text-[10px]
-              uppercase
-              tracking-wide
-              text-[rgb(var(--color-primary))]
-              "
-            >
-              {category}
-            </Link>
+            {category && (
+              <Link
+                href={`/blog/kategori/${category.toLowerCase().replace(/\s+/g, "-")}`}
+                className="caption-label text-primary"
+              >
+                {category}
+              </Link>
+            )}
 
-          )}
+            <h1 className="h2">
+              {post.title}
+            </h1>
 
-          <h1
-            className="
-            mt-2
-            text-[20px]
-            font-semibold
-            leading-snug
-            text-[rgb(var(--color-text))]
-            "
-          >
-            {post.title}
-          </h1>
+            <time className="caption-subtle">
+              {post.published_date}
+            </time>
 
-          <div
-            className="
-            text-[11px]
-            text-[rgb(var(--color-subtle))]
-            mt-1
-            "
-          >
-            {post.published_date}
-          </div>
+          </header>
 
           {featuredImage && (
-
-            <div
-              className="
-              relative
-              w-full
-              h-[220px]
-              mt-5
-              rounded-[var(--radius-lg)]
-              overflow-hidden
-              border
-              border-[rgb(var(--color-border))]
-              "
-            >
-
+            <div className="relative mt-6 h-[260px] rounded-[var(--radius-lg)] overflow-hidden border border-[rgb(var(--color-border))] shadow-[var(--shadow-soft)]">
               <Image
                 src={featuredImage}
                 alt={post.title}
                 fill
-                sizes="(max-width:768px) 100vw, 680px"
                 className="object-cover"
                 priority
               />
-
             </div>
-
           )}
 
           {/* CONTENT */}
-
-          <div
+          <section
             className="
-            mt-7
-            text-[13px]
-            leading-relaxed
-            space-y-4
-            text-[rgb(var(--color-text))]
+            mt-8
+            space-y-5
+            body
 
-            [&_h2]:text-[15px]
-            [&_h2]:font-semibold
-            [&_h2]:mt-8
+            [&_h2]:h3
+            [&_h2]:mt-10
 
-            [&_h3]:text-[14px]
+            [&_h3]:text-[15px]
             [&_h3]:font-semibold
-            [&_h3]:mt-6
+            [&_h3]:mt-8
 
-            [&_p]:text-[13px]
             [&_p]:text-[rgb(var(--color-muted))]
+            [&_p]:leading-[1.8]
+
+            [&_ul]:pl-5
+            [&_li]:mb-1
             "
             dangerouslySetInnerHTML={{
               __html: content
@@ -491,181 +264,128 @@ export default async function BlogDetailPage(
           />
 
           {faqItems.length > 0 && (
-
-            <BlogFAQ
-              items={faqItems}
-            />
-
+            <section className="mt-12">
+              <BlogFAQ items={faqItems} />
+            </section>
           )}
 
           {/* TAGS */}
-
           {tags.length > 0 && (
+            <section className="mt-10 pt-6 border-t border-[rgb(var(--color-border))]">
 
-            <div
-              className="
-              mt-8
-              pt-5
-              border-t
-              border-[rgb(var(--color-border))]
-              "
-            >
-
-              <div
-                className="
-                text-[10px]
-                uppercase
-                tracking-wide
-                text-[rgb(var(--color-subtle))]
-                mb-2
-                "
-              >
+              <div className="caption-label mb-3">
                 Tags
               </div>
 
               <div className="flex flex-wrap gap-2">
 
                 {tags.map((tag) => (
-
                   <Link
                     key={tag}
-                    href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g,"-")}`}
+                    href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, "-")}`}
                     className="
-                    text-[11px]
-                    px-2.5
-                    py-1
-                    border
+                    text-[12px]
+                    px-3 py-1
                     rounded-[var(--radius-sm)]
+                    border
                     border-[rgb(var(--color-border))]
+                    bg-[rgb(var(--color-soft))]
                     text-[rgb(var(--color-muted))]
+                    hover:bg-[rgb(var(--color-primary)/0.08)]
                     hover:text-[rgb(var(--color-primary))]
+                    transition
                     "
                   >
                     {tag}
                   </Link>
-
                 ))}
 
               </div>
-
-            </div>
-
+            </section>
           )}
 
-          <section className="mt-12">
-
-            <RelatedPosts
-              posts={related}
-            />
-
+          <section className="mt-14">
+            <RelatedPosts posts={related} />
           </section>
 
         </article>
 
-        {/* ======================
-           SIDEBAR
-        ====================== */}
+        {/* ================= SIDEBAR ================= */}
 
         <aside className="hidden lg:block">
 
           <div className="sticky top-24 space-y-6">
 
-            <TableOfContents
-              items={toc}
-            />
+            <TableOfContents items={toc} />
 
             {/* POPULAR */}
+            <div className="card-premium">
 
-            <div
-              className="
-              p-4
-              rounded-[var(--radius-md)]
-              border
-              border-[rgb(var(--color-border))]
-              bg-[rgb(var(--color-surface))]
-              "
-            >
-
-              <div
-                className="
-                text-[11px]
-                font-semibold
-                mb-3
-                "
-              >
+              <div className="caption-label mb-3">
                 Popular Articles
               </div>
 
               <div className="space-y-2">
-
                 {popular.map((p) => (
-
                   <Link
                     key={p.slug}
                     href={`/blog/${p.slug}`}
                     className="
                     block
-                    text-[12px]
+                    text-[13px]
                     text-[rgb(var(--color-muted))]
                     hover:text-[rgb(var(--color-primary))]
+                    transition
                     "
                   >
                     {p.title}
                   </Link>
-
                 ))}
-
               </div>
 
             </div>
 
-            {/* CATEGORIES */}
-
+            {/* CATEGORIES (FIXED) */}
             {categories.length > 0 && (
+              <div className="card-premium">
 
-              <div
-                className="
-                p-4
-                rounded-[var(--radius-md)]
-                border
-                border-[rgb(var(--color-border))]
-                bg-[rgb(var(--color-surface))]
-                "
-              >
-
-                <div
-                  className="
-                  text-[11px]
-                  font-semibold
-                  mb-3
-                  "
-                >
+                <div className="caption-label mb-3">
                   Kategori
                 </div>
 
-                <div className="space-y-2">
+                <div className="flex flex-wrap gap-2">
 
-                  {categories.map((cat) => (
+                  {categories.map((cat) => {
 
-                    <Link
-                      key={cat}
-                      href={`/blog/kategori/${cat.toLowerCase().replace(/\s+/g,"-")}`}
-                      className="
-                      block
-                      text-[12px]
-                      text-[rgb(var(--color-muted))]
-                      hover:text-[rgb(var(--color-primary))]
-                      "
-                    >
-                      {cat}
-                    </Link>
+                    const slug =
+                      cat.toLowerCase().replace(/\s+/g, "-")
 
-                  ))}
+                    return (
+                      <Link
+                        key={cat}
+                        href={`/blog/kategori/${slug}`}
+                        className="
+                        text-[12px]
+                        px-3 py-1
+                        rounded-[var(--radius-sm)]
+                        border
+                        border-[rgb(var(--color-border))]
+                        bg-[rgb(var(--color-surface))]
+                        text-[rgb(var(--color-muted))]
+                        transition
+
+                        hover:bg-[rgb(var(--color-primary)/0.08)]
+                        hover:text-[rgb(var(--color-primary))]
+                        "
+                      >
+                        {cat}
+                      </Link>
+                    )
+                  })}
 
                 </div>
 
               </div>
-
             )}
 
           </div>
@@ -675,7 +395,5 @@ export default async function BlogDetailPage(
       </div>
 
     </main>
-
   )
-
 }

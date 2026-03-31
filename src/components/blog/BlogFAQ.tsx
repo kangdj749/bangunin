@@ -13,41 +13,50 @@ interface Props {
 
 export default function BlogFAQ({ items }: Props) {
 
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] =
+    useState<number | null>(0)
 
-  if (!items?.length) return null
+  if (!items || items.length === 0) return null
 
   return (
 
     <section
       className="
-      mt-12
+      mt-14
+      pt-8
       border-t
-      pt-6
       border-[rgb(var(--color-border))]
       "
     >
 
-      <h2
-        className="
-        text-[15px]
-        font-semibold
-        tracking-tight
-        text-[rgb(var(--color-text))]
-        mb-4
-        "
-      >
-        Pertanyaan Umum
-      </h2>
+      {/* HEADER */}
+      <header className="mb-6 max-w-[640px]">
 
+        <div className="caption-label text-[rgb(var(--color-subtle))]">
+          FAQ
+        </div>
+
+        <h2 className="h3 mt-1">
+          Pertanyaan Umum
+        </h2>
+
+        <p className="caption mt-2">
+          Ringkasan pertanyaan yang sering muncul terkait topik ini
+          dalam konteks perencanaan, rekayasa, dan konstruksi.
+        </p>
+
+      </header>
+
+      {/* LIST */}
       <div
         className="
-        divide-y
-        divide-[rgb(var(--color-border))]
+        rounded-[var(--radius-lg)]
         border
         border-[rgb(var(--color-border))]
-        rounded-[var(--radius-md)]
         bg-[rgb(var(--color-surface))]
+        shadow-[var(--shadow-soft)]
+        divide-y
+        divide-[rgb(var(--color-border))]
         "
       >
 
@@ -57,8 +66,9 @@ export default function BlogFAQ({ items }: Props) {
 
           return (
 
-            <div key={i}>
+            <div key={i} className="group">
 
+              {/* QUESTION */}
               <button
                 onClick={() =>
                   setOpenIndex(open ? null : i)
@@ -66,50 +76,68 @@ export default function BlogFAQ({ items }: Props) {
                 className="
                 w-full
                 text-left
-                px-4
-                py-3
+                px-5
+                py-4
                 flex
                 items-start
                 justify-between
-                gap-3
-                text-[12px]
-                font-medium
-                text-[rgb(var(--color-text))]
-                hover:bg-[rgb(var(--color-elevated))]
+                gap-4
                 transition
+
+                hover:bg-[rgb(var(--color-elevated))]
                 "
               >
 
-                <span className="leading-snug">
+                <span
+                  className="
+                  text-[14px]
+                  font-medium
+                  leading-snug
+                  text-[rgb(var(--color-text))]
+                  "
+                >
                   {faq.q}
                 </span>
 
+                {/* ICON */}
                 <span
-                  className="
+                  className={`
                   text-[rgb(var(--color-subtle))]
-                  text-[12px]
-                  "
+                  text-[14px]
+                  transition-transform
+                  duration-300
+                  ${open ? "rotate-45" : ""}
+                  `}
                 >
-                  {open ? "–" : "+"}
+                  +
                 </span>
 
               </button>
 
-              {open && (
+              {/* ANSWER */}
+              <div
+                className={`
+                overflow-hidden
+                transition-all
+                duration-300
+                ${open ? "max-h-[500px]" : "max-h-0"}
+                `}
+              >
 
                 <div
                   className="
-                  px-4
-                  pb-4
-                  text-[12px]
-                  leading-relaxed
+                  px-5
+                  pb-5
+                  pr-8
+                  text-[13.5px]
+                  leading-[1.8]
                   text-[rgb(var(--color-muted))]
                   "
                 >
                   {faq.a}
                 </div>
 
-              )}
+              </div>
 
             </div>
 

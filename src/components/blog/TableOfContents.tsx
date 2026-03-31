@@ -8,7 +8,9 @@ interface TableOfContentsProps {
   items: TOCItem[]
 }
 
-export default function TableOfContents({ items }: TableOfContentsProps) {
+export default function TableOfContents({
+  items
+}: TableOfContentsProps) {
 
   if (!items || items.length === 0) return null
 
@@ -16,31 +18,32 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
 
     <aside
       className="
-      mb-8
       rounded-[var(--radius-lg)]
       border
       border-[rgb(var(--color-border))]
       bg-[rgb(var(--color-surface))]
-      p-4
       shadow-[var(--shadow-soft)]
+      p-5
       "
     >
 
-      <p
-        className="
-        mb-3
-        text-[13px]
-        font-semibold
-        tracking-tight
-        text-[rgb(var(--color-text))]
-        "
-      >
-        Daftar Isi
-      </p>
+      {/* HEADER */}
+      <div className="mb-4">
 
+        <div className="caption-label text-[rgb(var(--color-subtle))]">
+          Navigasi Artikel
+        </div>
+
+        <p className="text-[14px] font-semibold text-[rgb(var(--color-text))] mt-1">
+          Daftar Isi
+        </p>
+
+      </div>
+
+      {/* LIST */}
       <nav aria-label="Table of contents">
 
-        <ul className="space-y-1">
+        <ul className="space-y-2">
 
           {items.map((item) => {
 
@@ -52,22 +55,45 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
               <li
                 key={item.id}
                 className={`
-                ${isSub ? "ml-3 pl-3 border-l border-[rgb(var(--color-border))]" : ""}
+                group
+                relative
+                ${isSub ? "ml-4 pl-4" : ""}
                 `}
               >
 
+                {/* INDICATOR LINE */}
+                {isSub && (
+                  <span
+                    className="
+                    absolute
+                    left-0
+                    top-1
+                    bottom-1
+                    w-[1px]
+                    bg-[rgb(var(--color-border))]
+                  "
+                  />
+                )}
+
                 <a
                   href={`#${item.id}`}
-                  className="
+                  className={`
                   block
-                  text-[13px]
+                  text-[13.5px]
                   leading-relaxed
-                  text-[rgb(var(--color-muted))]
-                  transition-colors
+                  transition-all
+
+                  ${isSub
+                    ? "text-[rgb(var(--color-subtle))]"
+                    : "text-[rgb(var(--color-muted))] font-medium"
+                  }
+
                   hover:text-[rgb(var(--color-primary))]
-                  "
+                  `}
                 >
+
                   {item.text}
+
                 </a>
 
               </li>
